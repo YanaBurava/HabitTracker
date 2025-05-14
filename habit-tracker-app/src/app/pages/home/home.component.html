@@ -1,0 +1,28 @@
+<div class="home">
+  <h1>My Habits Tracker</h1>
+
+  <!-- Отображаем текущую дату -->
+  <div class="date">
+    <p>Today's Date: <span>{{ currentDate }}</span></p>
+  </div>
+
+  <div class="weather">
+    <p>Weather: <span>{{ weather?.temperature }}°C</span></p>
+    <p>{{ weather?.description }}</p>
+  </div>
+
+  <div class="word-of-the-day">
+    <p><strong>Word of the Day:</strong> {{ wordOfTheDay?.word }}</p>
+    <p>{{ wordOfTheDay?.definition }}</p>
+  </div>
+
+  <div class="active-habits">
+    <h2>Active Habits for the Week</h2>
+    <ul>
+      <li *ngFor="let habit of activeHabits">
+        <span>{{ habit.name }}</span>
+        <span [class.completed]="habit.completed">✔️</span>
+      </li>
+    </ul>
+  </div>
+</div>
