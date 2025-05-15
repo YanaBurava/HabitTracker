@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     const today = new Date();
     this.currentDate = today.toLocaleDateString();
 
-    // Пример данных, это можно будет заменить на реальный API
+    // заменить на реальный API
     this.weather = {
       temperature: 22,
       description: 'Sunny'

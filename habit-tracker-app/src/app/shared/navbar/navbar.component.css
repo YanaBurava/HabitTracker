@@ -1,4 +1,4 @@
-/* RESET */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
 }
 
 .navbar {
-  background-color: #fffaf0; /* светлый фон */
+  background-color: #fffaf0; 
   border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
@@ -27,7 +27,7 @@
 .navbar-logo {
   font-weight: bold;
   font-size: 1.2rem;
-  color: #5c4033; /* шоколад */
+  color: #5c4033;
 }
 
 .navbar-menu {
@@ -38,7 +38,7 @@
 
 .navbar-menu li a {
   text-decoration: none;
-  color: #5c4033; /* шоколад */
+  color: #5c4033;
   font-weight: 500;
   padding: 6px 10px;
   border-radius: 6px;
@@ -46,15 +46,15 @@
 }
 
 .navbar-menu li a:hover {
-  background-color: #fff5cc; /* сливочное масло */
+  background-color: #fff5cc; 
 }
 
 .navbar-menu li a.active {
-  background-color: #5c4033; /* шоколад */
+  background-color: #5c4033;
   color: white;
 }
 
-/* Hamburger */
+
 .menu-icon {
   display: none;
   font-size: 1.6rem;
@@ -66,7 +66,7 @@
   display: none;
 }
 
-/* Mobile Styles */
+
 @media (max-width: 768px) {
   .navbar-menu {
     position: absolute;

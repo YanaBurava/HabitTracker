@@ -14,7 +14,7 @@ export class HabitDetailComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.habitId = +params['id']; // Преобразуем строку в число
+      this.habitId = +params['id'];
     });
   }
 }
