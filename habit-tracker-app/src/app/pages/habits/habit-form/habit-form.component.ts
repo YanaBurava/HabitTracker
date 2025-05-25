@@ -1,27 +1,29 @@
-import { Component, Input, Output, EventEmitter,OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Habit } from '../../../models/habit.model';
 
 @Component({
   selector: 'app-habit-form',
   templateUrl: './habit-form.component.html',
-    standalone: false,
-  styleUrls: ['./habit-form.component.scss']
+  styleUrls: ['./habit-form.component.scss'],
+  standalone: false
 })
-export class HabitFormComponent implements OnChanges {
-  @Input() habit: Habit | null = null;
+export class HabitFormComponent {
+  private _habit: Habit | null = null;
+
+  @Input()
+  set habit(value: Habit | null) {
+    this._habit = value;
+    this.editableHabit = value ? { ...value } : this.getEmptyHabit();
+  }
+
+  get habit(): Habit | null {
+    return this._habit;
+  }
+
   @Output() save = new EventEmitter<Habit>();
   @Output() cancel = new EventEmitter<void>();
 
   editableHabit: Habit = this.getEmptyHabit();
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.habit) {
-     
-      this.editableHabit = { ...this.habit };
-    } else {
-      this.editableHabit = this.getEmptyHabit();
-    }
-  }
 
   private getEmptyHabit(): Habit {
     return {
@@ -29,18 +31,26 @@ export class HabitFormComponent implements OnChanges {
       name: '',
       description: '',
       icon: '',
-      color: '#ffffff',
-      daysOfWeek: [],
+      color: '#000000',
       progress: [false, false, false, false, false, false, false],
       goal: 1,
-      isActive: true,
+      group: 'General',
+      isActive: false,
       isExpired: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      startDate: new Date(),
+      endDate: undefined
     };
   }
 
   onSubmit() {
+    const now = new Date();
+    this.editableHabit.isActive = this.editableHabit.startDate <= now &&
+      (!this.editableHabit.endDate || this.editableHabit.endDate >= now);
+
+    this.editableHabit.isExpired = this.editableHabit.endDate
+      ? this.editableHabit.endDate < now
+      : false;
+
     this.save.emit(this.editableHabit);
   }
 

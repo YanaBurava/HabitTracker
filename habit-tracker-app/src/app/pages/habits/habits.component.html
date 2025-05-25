@@ -1,19 +1,21 @@
-<!-- Показываем кнопку и карточки, только если не редактируем -->
 <div *ngIf="!editingHabit">
   <button mat-raised-button color="primary" (click)="onAddHabit()">
     Add
   </button>
 
-  <div class="habit-list">
-    <app-habit-card
-      *ngFor="let habit of habits"
-      [habit]="habit"
-      (edit)="onEditHabit($event)"
-      (delete)="handleDelete($event)">
-    </app-habit-card>
-  </div>
+  <mat-tab-group>
+    <mat-tab *ngFor="let group of Object.keys(groupedHabits)" [label]="group">
+      <div class="habit-list">
+        <app-habit-card
+          *ngFor="let habit of groupedHabits[group]"
+          [habit]="habit"
+          (edit)="onEditHabit($event)"
+          (delete)="handleDelete($event)">
+        </app-habit-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
-
 
 <app-habit-form
   *ngIf="editingHabit"

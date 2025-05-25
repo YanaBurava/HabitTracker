@@ -2,13 +2,13 @@ export interface Habit {
   id: number;
   name: string;
   description?: string;
-  icon?: string;
-  color?: string;
-  daysOfWeek?: string[];
-  progress: boolean[]; 
-  goal: number;      
+  icon: string;
+  color: string;
+  progress: boolean[];
+  goal: number;
+  group: string;
   isActive: boolean;
   isExpired: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  startDate: Date;
+  endDate?: Date;
 }
