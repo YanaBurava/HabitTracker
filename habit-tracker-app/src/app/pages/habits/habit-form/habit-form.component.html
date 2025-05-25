@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()" #habitForm="ngForm">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput name="name" [(ngModel)]="editableHabit.name" required />
+    <mat-error *ngIf="habitForm.submitted && !editableHabit.name">Required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" [(ngModel)]="editableHabit.description" rows="3"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="icon-field">
+    <mat-label>Icon</mat-label>
+    <input matInput name="icon" [(ngModel)]="editableHabit.icon" maxlength="2" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="color-field">
+    <mat-label>Colour</mat-label>
+    <input matInput type="color" name="color" [(ngModel)]="editableHabit.color" />
+  </mat-form-field>
+
+   <mat-form-field appearance="outline" class="start-date-field">
+    <mat-label>Date Start</mat-label>
+    <input matInput [matDatepicker]="picker" name="createdAt" [(ngModel)]="editableHabit.createdAt" required />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="habitForm.submitted && !editableHabit.createdAt">Select</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="goal-field">
+    <mat-label>Days per week</mat-label>
+    <mat-select name="goal" [(ngModel)]="editableHabit.goal" required>
+      <mat-option *ngFor="let day of [1,2,3,4,5,6,7]" [value]="day">{{ day }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="habitForm.submitted && !editableHabit.goal">Select</mat-error>
+  </mat-form-field>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" type="submit">Save</button>
+    <button mat-raised-button color="warn" type="button" (click)="onCancel()">Calsel</button>
+  </div>
+
+</form>

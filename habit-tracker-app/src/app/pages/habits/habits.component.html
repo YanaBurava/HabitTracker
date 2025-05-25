@@ -1,6 +1,23 @@
-<h2>Your Habits</h2>
-<ul>
-  <li *ngFor="let habit of habits">
-    <a [routerLink]="['/habit-detail', habit.id]">{{habit.name }}</a>
-  </li>
-</ul>
+<!-- Показываем кнопку и карточки, только если не редактируем -->
+<div *ngIf="!editingHabit">
+  <button mat-raised-button color="primary" (click)="onAddHabit()">
+    Add
+  </button>
+
+  <div class="habit-list">
+    <app-habit-card
+      *ngFor="let habit of habits"
+      [habit]="habit"
+      (edit)="onEditHabit($event)"
+      (delete)="handleDelete($event)">
+    </app-habit-card>
+  </div>
+</div>
+
+
+<app-habit-form
+  *ngIf="editingHabit"
+  [habit]="editingHabit"
+  (save)="onSaveHabit($event)"
+  (cancel)="onCancelEdit()">
+</app-habit-form>

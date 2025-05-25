@@ -1,0 +1,16 @@
+<mat-card class="habit-card" [style.border-color]="habit.color">
+  <mat-card-header>
+    <div class="habit-title">
+      <mat-icon class="habit-icon">{{ habit.icon }}</mat-icon>
+      <span>{{ habit.name }}</span>
+    </div>
+    <div class="actions">
+      <button mat-icon-button (click)="onEdit()" aria-label="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDelete()" aria-label="Delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+</mat-card>
