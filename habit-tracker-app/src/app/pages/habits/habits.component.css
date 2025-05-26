@@ -1,0 +1,41 @@
+.active-habit {
+  box-shadow: 0 0 10px 3px #4caf50; /* зеленое свечение */
+  transition: box-shadow 0.3s ease-in-out;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.group-filter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.group-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.add-button {
+  white-space: nowrap;
+}
+

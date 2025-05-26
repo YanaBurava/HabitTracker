@@ -3,12 +3,13 @@ import { Habit } from '../models/habit.model';
 export const MOCK_HABIT: Habit[] = [
   {
     id: 1,
-    name: '💪 Exercise',
-    icon: '💪',
+    name: 'Exercise',
+    icon: 'fitness_center',
     color: '#007bff',
+    description: 'Morning workouts to stay fit and energetic.',
     progress: [true, false, true, true, false, true, false],
     goal: 5,
-    group: 'Health',            // Добавил группу
+    group: 'Health',
     isActive: true,
     isExpired: false,
     startDate: new Date('2024-05-01'),
@@ -17,8 +18,9 @@ export const MOCK_HABIT: Habit[] = [
   {
     id: 2,
     name: 'Cold Shower',
-    icon: '🛁',
+    icon: 'shower',
     color: '#17a2b8',
+    description: 'Invigorating cold showers every morning.',
     progress: [false, false, false, true, false, false, false],
     goal: 3,
     group: 'Health',
@@ -29,9 +31,10 @@ export const MOCK_HABIT: Habit[] = [
   },
   {
     id: 3,
-    name: '🦷 Floss',
-    icon: '🦷',
+    name: 'Floss',
+    icon: 'medical_services',
     color: '#28a745',
+    description: 'Floss teeth daily for oral hygiene.',
     progress: [true, true, true, true, true, false, true],
     goal: 7,
     group: 'Health',
@@ -43,11 +46,12 @@ export const MOCK_HABIT: Habit[] = [
   {
     id: 4,
     name: 'Meditate',
-    icon: '🧘',
+    icon: 'self_improvement',
     color: '#ffc107',
+    description: 'Daily meditation for mindfulness and calm.',
     progress: [false, false, true, false, true, false, false],
     goal: 4,
-    group: 'Mindfulness',     // Другая группа
+    group: 'Mindfulness',
     isActive: true,
     isExpired: false,
     startDate: new Date('2024-05-02'),
@@ -56,14 +60,15 @@ export const MOCK_HABIT: Habit[] = [
   {
     id: 5,
     name: 'Journal',
-    icon: '📖',
+    icon: 'menu_book',
     color: '#6f42c1',
+    description: 'Write daily reflections and thoughts.',
     progress: [true, true, true, true, true, true, true],
     goal: 7,
     group: 'Mindfulness',
     isActive: true,
     isExpired: false,
     startDate: new Date('2024-05-01'),
-   endDate: new Date(),
+    endDate: new Date(),
   },
 ];

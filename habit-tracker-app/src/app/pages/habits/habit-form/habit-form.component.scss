@@ -48,3 +48,14 @@ button.cancel {
     background-color: #d32f2f;
   }
 }
+.icon-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+
+  mat-icon {
+    font-size: 24px;
+    color: #666;
+  }
+}

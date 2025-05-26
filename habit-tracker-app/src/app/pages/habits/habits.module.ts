@@ -6,6 +6,7 @@ import { HabitsRoutingModule } from './habits-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { HabitCardComponent } from './habit-card/habit-card.component';
 import { HabitGroupPipe } from '../../pipes/habit-group.pipe';
+import { ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +18,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   { path: '', component: HabitsComponent }
@@ -27,7 +31,8 @@ const routes: Routes = [
     HabitsComponent,
     HabitFormComponent,
     HabitCardComponent, 
-    HabitGroupPipe
+    HabitGroupPipe,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +50,9 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
      MatTabsModule,
+     MatTooltipModule,
+      MatPaginatorModule,
+       MatDialogModule,
      RouterModule.forChild(routes)
   ]
 })

@@ -1,25 +1,56 @@
-<div *ngIf="!editingHabit">
-  <button mat-raised-button color="primary" (click)="onAddHabit()">
-    Add
-  </button>
+<div class="top-bar">
+  <div class="group-filter groups-wrapper">
+    <button
+      mat-button
+      [color]="selectedGroup === 'All' ? 'primary' : ''"
+      (click)="onSelectGroup('All')"
+      class="group-btn"
+    >
+      <mat-icon>list</mat-icon>
+      <span>All</span>
+    </button>
 
-  <mat-tab-group>
-    <mat-tab *ngFor="let group of Object.keys(groupedHabits)" [label]="group">
-      <div class="habit-list">
-        <app-habit-card
-          *ngFor="let habit of groupedHabits[group]"
-          [habit]="habit"
-          (edit)="onEditHabit($event)"
-          (delete)="handleDelete($event)">
-        </app-habit-card>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+    <button
+      *ngFor="let group of objectKeys(groupedHabits)"
+      mat-button
+      [color]="selectedGroup === group ? 'primary' : ''"
+      (click)="onSelectGroup(group)"
+      class="group-btn"
+    >
+      <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
+      <span>{{ group }}</span>
+    </button>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="onAddHabit()" class="add-button">
+    Add Habit
+  </button>
+</div>
+
+<div class="habit-list" *ngIf="!editingHabit">
+  <app-habit-card
+    *ngFor="let habit of pagedHabits"
+    [habit]="habit"
+    (edit)="onEditHabit(habit)"
+    (delete)="handleDelete(habit)"
+    [class.active-habit]="habit.isActive"
+  >
+  </app-habit-card>
+
+  <mat-paginator
+    [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup]?.length || 0)"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
 </div>
 
 <app-habit-form
   *ngIf="editingHabit"
   [habit]="editingHabit"
+  [habitGroups]="objectKeys(groupedHabits)"
   (save)="onSaveHabit($event)"
-  (cancel)="onCancelEdit()">
+  (cancel)="onCancelEdit()"
+>
 </app-habit-form>

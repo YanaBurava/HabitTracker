@@ -1,5 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Habit } from '../../../models/habit.model';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-habit-form',
@@ -8,7 +12,11 @@ import { Habit } from '../../../models/habit.model';
   standalone: false
 })
 export class HabitFormComponent {
+  constructor(private dialog: MatDialog) {}
+
   private _habit: Habit | null = null;
+
+  @Input() habitGroups: string[] = [];
 
   @Input()
   set habit(value: Habit | null) {
@@ -22,7 +30,7 @@ export class HabitFormComponent {
 
   @Output() save = new EventEmitter<Habit>();
   @Output() cancel = new EventEmitter<void>();
-
+@ViewChild('habitForm') habitForm!: NgForm; 
   editableHabit: Habit = this.getEmptyHabit();
 
   private getEmptyHabit(): Habit {
@@ -38,9 +46,26 @@ export class HabitFormComponent {
       isActive: false,
       isExpired: false,
       startDate: new Date(),
-      endDate: undefined
+      endDate: null
     };
   }
+iconOptions = [
+  'directions_run',
+  'fitness_center',
+  'spa',
+  'book',
+  'restaurant',
+  'alarm',
+  'check_circle',
+  'favorite',
+  'school',
+  'brush',
+  'self_improvement',
+  'emoji_events',
+  'bedtime',
+  'star',
+  'mood'
+];
 
   onSubmit() {
     const now = new Date();
@@ -55,6 +80,23 @@ export class HabitFormComponent {
   }
 
   onCancel() {
+  if (!this._habit || JSON.stringify(this._habit) === JSON.stringify(this.editableHabit)) {
     this.cancel.emit();
+    return;
   }
+
+  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    width: '400px',
+    data: {
+      title: 'Discard changes?',
+      message: 'You have unsaved changes. Do you really want to cancel?'
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.cancel.emit();
+    }
+  });
+}
 }

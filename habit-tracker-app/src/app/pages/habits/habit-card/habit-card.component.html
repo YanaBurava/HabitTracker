@@ -1,8 +1,8 @@
-<mat-card class="habit-card" [style.border-color]="habit.color">
+<mat-card class="habit-card" [class.active-habit]="habit.isActive" [style.border-color]="habit.color">
   <mat-card-header>
-    <div class="habit-title">
+    <div class="habit-title" [style.color]="habit.color" [matTooltip]="habit.description" matTooltipPosition="above" matTooltipShowDelay="300">
       <mat-icon class="habit-icon">{{ habit.icon }}</mat-icon>
-      <span>{{ habit.name }}</span>
+      <h2>{{ habit.name }}</h2>
     </div>
     <div class="actions">
       <button mat-icon-button (click)="onEdit()" aria-label="Edit">
@@ -13,4 +13,17 @@
       </button>
     </div>
   </mat-card-header>
+
+  <mat-card-content class="habit-content">
+
+    <div class="habit-dates">
+      <span>Start: {{ habit.startDate | date: 'mediumDate' }}</span>
+      <span *ngIf="habit.endDate">• End: {{ habit.endDate | date: 'mediumDate' }}</span>
+    </div>
+
+    <div class="habit-status">
+      <span class="active" *ngIf="habit.isActive">Active</span>
+      <span class="expired" *ngIf="habit.isExpired">Inactive</span>
+    </div>
+  </mat-card-content>
 </mat-card>

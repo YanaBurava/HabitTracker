@@ -10,5 +10,5 @@ export interface Habit {
   isActive: boolean;
   isExpired: boolean;
   startDate: Date;
-  endDate?: Date;
+  endDate: Date | null;
 }
