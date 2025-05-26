@@ -6,7 +6,7 @@ import { startOfWeek, endOfWeek, format } from 'date-fns';
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
  currentDate!: string;
@@ -20,11 +20,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     const today = new Date();
     this.currentDate = today.toLocaleDateString();
-const weekStart = startOfWeek(today, { weekStartsOn: 1 }); // Monday
-    const weekEnd = endOfWeek(today, { weekStartsOn: 1 });     // Sunday
+const weekStart = startOfWeek(today, { weekStartsOn: 1 }); 
+    const weekEnd = endOfWeek(today, { weekStartsOn: 1 }); 
 
-    const formattedStart = format(weekStart, 'EEE dd MMM');  // Mon 13 May
-    const formattedEnd = format(weekEnd, 'EEE dd MMM');      // Sun 19 May
+    const formattedStart = format(weekStart, 'EEE dd MMM');
+    const formattedEnd = format(weekEnd, 'EEE dd MMM');  
     this.weekRange = `${formattedStart} – ${formattedEnd}`;
 
 

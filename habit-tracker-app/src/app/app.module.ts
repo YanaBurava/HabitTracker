@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AchievementsComponent } from './pages/achievements/achievements.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { AddHabitComponent } from './components/add-habit/add-habit.component';
 import { WordOfTheDayComponent } from './components/word-of-the-day/word-of-the-day.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -19,7 +18,6 @@ import { MatCardModule } from '@angular/material/card';
     AppComponent,
     AchievementsComponent,
     NavbarComponent,
-    AddHabitComponent,
     WordOfTheDayComponent
   ],
   imports: [

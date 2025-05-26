@@ -8,7 +8,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   selector: 'app-habits',
   standalone: false,
   templateUrl: './habits.component.html',
-  styleUrl: './habits.component.css'
+  styleUrl: './habits.component.scss'
 })
 
 export class HabitsComponent implements OnInit {

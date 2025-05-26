@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-today',
   standalone: false,
   templateUrl: './today.component.html',
-  styleUrl: './today.component.css'
+  styleUrl: './today.component.scss'
 })
 export class TodayComponent {
 

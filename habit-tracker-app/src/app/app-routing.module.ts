@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AchievementsComponent } from './pages/achievements/achievements.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { DictionaryComponent } from './pages/dictionary/dictionary.component';
-import { AddHabitComponent } from './components/add-habit/add-habit.component';
 import { HabitDetailComponent } from './components/habit-detail/habit-detail.component';
 import { WordOfTheDayComponent } from './components/word-of-the-day/word-of-the-day.component';
 
@@ -35,7 +34,6 @@ const routes: Routes = [
   },  { path: 'achievements', component: AchievementsComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'dictionary', component: DictionaryComponent },
-  { path: 'add-habit', component: AddHabitComponent },
   { path: 'habit-detail/:id', component: HabitDetailComponent },
   { path: 'word-of-the-day', component: WordOfTheDayComponent },
    { path: '**', redirectTo: 'home' }

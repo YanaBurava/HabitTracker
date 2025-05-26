@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-archive',
   standalone: false,
   templateUrl: './archive.component.html',
-  styleUrl: './archive.component.css'
+  styleUrl: './archive.component.scss'
 })
 export class ArchiveComponent {
 
