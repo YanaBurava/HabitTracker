@@ -21,17 +21,16 @@ import { MatCardModule } from '@angular/material/card';
     WordOfTheDayComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+  BrowserModule,
+  AppRoutingModule,
   MatToolbarModule,
   MatSidenavModule,
   MatIconModule,
   MatListModule,
   MatButtonModule,
-   MatTabsModule,
-   MatCardModule,
-   MatSlideToggleModule
-
+  MatTabsModule,
+  MatCardModule,
+  MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

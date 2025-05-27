@@ -31,7 +31,8 @@ const routes: Routes = [
     path: 'statistics',
     loadChildren: () =>
       import('./pages/statistics/statistics.module').then(m => m.StatisticsModule)
-  },  { path: 'achievements', component: AchievementsComponent },
+  },
+  { path: 'achievements', component: AchievementsComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'dictionary', component: DictionaryComponent },
   { path: 'habit-detail/:id', component: HabitDetailComponent },
