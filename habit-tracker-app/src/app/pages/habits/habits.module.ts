@@ -40,20 +40,20 @@ const routes: Routes = [
     MatCardModule,
     MatIconModule,     
     MatButtonModule,
-     FormsModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
-     MatFormFieldModule,
+    MatFormFieldModule,
     MatButtonModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-     MatTabsModule,
-     MatTooltipModule,
-      MatPaginatorModule,
-       MatDialogModule,
-     RouterModule.forChild(routes)
+    MatTabsModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatDialogModule,
+   RouterModule.forChild(routes)
   ]
 })
 export class HabitsModule { }

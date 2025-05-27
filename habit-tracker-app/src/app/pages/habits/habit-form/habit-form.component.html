@@ -28,14 +28,6 @@
     <input matInput type="color" name="color" [(ngModel)]="editableHabit.color" />
   </mat-form-field>
 
-   <mat-form-field appearance="outline" class="start-date-field">
-    <mat-label>Date Start</mat-label>
-    <input matInput [matDatepicker]="picker" name="createdAt" [(ngModel)]="editableHabit.startDate" required />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="habitForm.submitted && !editableHabit.startDate">Select</mat-error>
-  </mat-form-field>
-
   <mat-form-field appearance="outline" class="goal-field">
     <mat-label>Days per week</mat-label>
     <mat-select name="goal" [(ngModel)]="editableHabit.goal" required>

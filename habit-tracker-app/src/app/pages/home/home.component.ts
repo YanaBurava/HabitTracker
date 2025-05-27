@@ -12,10 +12,6 @@ export class HomeComponent implements OnInit {
  currentDate!: string;
   weather: any;
   wordOfTheDay: any;
-    days: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  weekRange!: string;
-   habitGroups: HabitGroup[] = [];
-
 
   ngOnInit() {
     const today = new Date();
@@ -23,18 +19,7 @@ export class HomeComponent implements OnInit {
 const weekStart = startOfWeek(today, { weekStartsOn: 1 }); 
     const weekEnd = endOfWeek(today, { weekStartsOn: 1 }); 
 
-    const formattedStart = format(weekStart, 'EEE dd MMM');
-    const formattedEnd = format(weekEnd, 'EEE dd MMM');  
-    this.weekRange = `${formattedStart} – ${formattedEnd}`;
-
-
-     this.habitGroups.forEach(group => {
-    group.habits.forEach(habit => {
-      console.log(habit.name, habit.progress, habit.progress.length);
-    });
-  });
-
-    // заменить на реальный API
+    // TODO заменить на реальный API
     this.weather = {
       temperature: 22,
       description: 'Sunny'

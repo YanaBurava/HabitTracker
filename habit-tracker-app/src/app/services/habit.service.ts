@@ -1,46 +1,49 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Habit } from '../models/habit.model';
+import { MOCK_HABIT } from '../mock/mock-habit';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class HabitService {
-  private readonly storageKey = 'habits';
-  private habitsSubject = new BehaviorSubject<Habit[]>(this.loadHabits());
-
-  habits$ = this.habitsSubject.asObservable();
-
-  private loadHabits(): Habit[] {
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : [];
+  getHabits(): Habit[] {
+    return MOCK_HABIT.map(habit => ({
+      ...habit,
+      startDate: new Date(habit.startDate),
+      endDate: habit.endDate ? new Date(habit.endDate) : null,
+    }));
   }
 
-  private saveHabits(habits: Habit[]): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(habits));
-    this.habitsSubject.next(habits);
+  updateHabitStatuses(habits: Habit[]): Habit[] {
+    const now = new Date();
+    return habits.map(habit => ({
+      ...habit,
+      isActive: habit.startDate <= now && (!habit.endDate || habit.endDate >= now),
+      isExpired: habit.endDate ? habit.endDate < now : false
+    }));
   }
 
-  getAllHabits(): Habit[] {
-    return this.habitsSubject.value;
+  groupHabits(habits: Habit[]): { [group: string]: Habit[] } {
+    return habits.reduce((acc, habit) => {
+      const group = habit.group || 'Other';
+      if (!acc[group]) {
+        acc[group] = [];
+      }
+      acc[group].push(habit);
+      return acc;
+    }, {} as { [group: string]: Habit[] });
   }
 
-  getHabitById(id: number): Habit | undefined {
-    return this.getAllHabits().find(h => h.id === id);
-  }
-
-  addHabit(habit: Habit): void {
-    const habits = this.getAllHabits();
-    this.saveHabits([...habits, habit]);
-  }
-
-  updateHabit(updatedHabit: Habit): void {
-    const habits = this.getAllHabits().map(h => (h.id === updatedHabit.id ? updatedHabit : h));
-    this.saveHabits(habits);
-  }
-
-  deleteHabit(id: number): void {
-    const habits = this.getAllHabits().filter(h => h.id !== id);
-    this.saveHabits(habits);
+  getIconForGroup(group: string): string {
+    const iconMap: Record<string, string> = {
+      General: 'home',
+      Fitness: 'fitness_center',
+      Reading: 'menu_book',
+      Relax: 'spa',
+      Food: 'restaurant',
+      Study: 'school',
+      Sleep: 'bedtime',
+    };
+    return iconMap[group] || 'category';
   }
 }

@@ -4,8 +4,7 @@
       mat-button
       [color]="selectedGroup === 'All' ? 'primary' : ''"
       (click)="onSelectGroup('All')"
-      class="group-btn"
-    >
+      class="group-btn">
       <mat-icon>list</mat-icon>
       <span>All</span>
     </button>
@@ -15,8 +14,7 @@
       mat-button
       [color]="selectedGroup === group ? 'primary' : ''"
       (click)="onSelectGroup(group)"
-      class="group-btn"
-    >
+      class="group-btn">
       <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
       <span>{{ group }}</span>
     </button>
@@ -33,16 +31,14 @@
     [habit]="habit"
     (edit)="onEditHabit(habit)"
     (delete)="handleDelete(habit)"
-    [class.active-habit]="habit.isActive"
-  >
+    [class.active-habit]="habit.isActive">
   </app-habit-card>
 
   <mat-paginator
     [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup].length || 0)"
     [pageSize]="pageSize"
     [pageSizeOptions]="[5, 10, 25]"
-    (page)="onPageChange($event)"
-  >
+    (page)="onPageChange($event)">
   </mat-paginator>
 </div>
 
@@ -51,6 +47,5 @@
   [habit]="editingHabit"
   [habitGroups]="objectKeys(groupedHabits)"
   (save)="onSaveHabit($event)"
-  (cancel)="onCancelEdit()"
->
+  (cancel)="onCancelEdit()">
 </app-habit-form>
