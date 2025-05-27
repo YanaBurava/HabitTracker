@@ -1,0 +1,21 @@
+.home {
+  padding: 20px;
+}
+
+.weather, .word-of-the-day {
+  margin-bottom: 20px;
+}
+
+.active-habits ul {
+  list-style-type: none;
+}
+
+.active-habits li {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.active-habits .completed {
+  color: green;
+}

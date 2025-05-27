@@ -1,0 +1,96 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  background-color: #fffaf0; 
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #5c4033;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-menu li a {
+  text-decoration: none;
+  color: #5c4033;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar-menu li a:hover {
+  background-color: #fff5cc; 
+}
+
+.navbar-menu li a.active {
+  background-color: #5c4033;
+  color: white;
+}
+
+
+.menu-icon {
+  display: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #5c4033;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fffaf0;
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .menu-toggle:checked + .menu-icon + .navbar-menu {
+    max-height: 400px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .navbar-menu li {
+    padding: 0.75rem 1rem;
+    text-align: center;
+  }
+}
