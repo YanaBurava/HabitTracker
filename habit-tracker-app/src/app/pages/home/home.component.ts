@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HabitGroup } from '../../models/habit-group.model';
 import { startOfWeek, endOfWeek, format } from 'date-fns';
 
 @Component({
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     const today = new Date();
     this.currentDate = today.toLocaleDateString();
-const weekStart = startOfWeek(today, { weekStartsOn: 1 }); 
+    const weekStart = startOfWeek(today, { weekStartsOn: 1 }); 
     const weekEnd = endOfWeek(today, { weekStartsOn: 1 }); 
 
     // TODO заменить на реальный API
