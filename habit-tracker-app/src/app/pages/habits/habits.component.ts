@@ -122,4 +122,8 @@ export class HabitsComponent implements OnInit {
   get habitGroups(): string[] {
   return Object.keys(this.groupedHabits);
 }
+
+isGroupSelected(group: string): 'primary' | '' {
+  return this.selectedGroup === group ? 'primary' : '';
+}
 }
