@@ -12,11 +12,11 @@ export class HabitCardComponent {
   @Output() edit = new EventEmitter<Habit>();
  @Output() delete = new EventEmitter<Habit>();
 
-  onEdit() {
+  onEdit():void {
     this.edit.emit(this.habit);
   }
 
-  onDelete() {
+  onDelete():void  {
     this.delete.emit(this.habit);
   }
 }

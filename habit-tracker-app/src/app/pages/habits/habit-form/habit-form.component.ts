@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { Habit } from '../../../models/habit.model';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { HabitFormLabels } from './habit-form-labels.enum';
+import { HABIT_ICONS } from '../../../constants/habit-icons.constant';
 
 @Component({
   selector: 'app-habit-form',
@@ -12,6 +14,9 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: false
 })
 export class HabitFormComponent {
+  labels = HabitFormLabels;
+  iconOptions = HABIT_ICONS;
+
   constructor(private dialog: MatDialog) {}
 
   private _habit: Habit | null = null;
@@ -30,7 +35,7 @@ export class HabitFormComponent {
 
   @Output() save = new EventEmitter<Habit>();
   @Output() cancel = new EventEmitter<void>();
-@ViewChild('habitForm') habitForm!: NgForm; 
+  @ViewChild('habitForm') habitForm!: NgForm; 
   editableHabit: Habit = this.getEmptyHabit();
 
   private getEmptyHabit(): Habit {
@@ -49,25 +54,8 @@ export class HabitFormComponent {
       endDate: null
     };
   }
-iconOptions = [
-  'directions_run',
-  'fitness_center',
-  'spa',
-  'book',
-  'restaurant',
-  'alarm',
-  'check_circle',
-  'favorite',
-  'school',
-  'brush',
-  'self_improvement',
-  'emoji_events',
-  'bedtime',
-  'star',
-  'mood'
-];
 
-  onSubmit() {
+  onSubmit():void  {
     const now = new Date();
     this.editableHabit.isActive = this.editableHabit.startDate <= now &&
       (!this.editableHabit.endDate || this.editableHabit.endDate >= now);
@@ -79,7 +67,7 @@ iconOptions = [
     this.save.emit(this.editableHabit);
   }
 
-  onCancel() {
+  onCancel():void  {
   if (!this._habit || JSON.stringify(this._habit) === JSON.stringify(this.editableHabit)) {
     this.cancel.emit();
     return;
@@ -89,7 +77,7 @@ iconOptions = [
     width: '400px',
     data: {
       title: 'Discard changes?',
-      message: 'You have unsaved changes. Do you really want to cancel?'
+      message: 'You have unsaved changes. Do you want to cancel?'
     }
   });
 
