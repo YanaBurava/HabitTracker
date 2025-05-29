@@ -16,7 +16,7 @@ export class HabitsComponent implements OnInit {
   selectedGroup: string = 'All';
   pagedHabits: Habit[] = [];
   editingHabit: Habit | null = null;
-
+  readonly pageSizeOptions = [5, 10, 25];
   pageSize = 5;
   currentPageIndex = 0;
 
@@ -99,7 +99,7 @@ export class HabitsComponent implements OnInit {
   }
 
   handleDelete(habitToDelete: Habit) {
-    this.habits = this.habits.filter(h => h.id !== habitToDelete.id);
+    this.habits = this.habits.filter(habit => habit.id !== habitToDelete.id);
     this.habits = this.habitService.updateHabitStatuses(this.habits);
     this.groupedHabits = this.habitService.groupHabits(this.habits);
     this.currentPageIndex = 0;
