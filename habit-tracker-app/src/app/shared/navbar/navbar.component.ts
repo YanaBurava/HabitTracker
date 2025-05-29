@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { AppRoutes } from '../../constants/routes.enum';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 
 export class NavbarComponent {
+   routes = AppRoutes;
   @Output() themeToggle = new EventEmitter<boolean>();
 
   toggleTheme(value: boolean) {

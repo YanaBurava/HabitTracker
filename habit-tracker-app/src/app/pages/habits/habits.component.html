@@ -10,7 +10,7 @@
     </button>
 
     <button
-      *ngFor="let group of objectKeys(groupedHabits)"
+      *ngFor="let group of habitGroups"
       mat-button
       [color]="selectedGroup === group ? 'primary' : ''"
       (click)="onSelectGroup(group)"
@@ -45,7 +45,7 @@
 <app-habit-form
   *ngIf="editingHabit"
   [habit]="editingHabit"
-  [habitGroups]="objectKeys(groupedHabits)"
+  [habitGroups]="habitGroups"
   (save)="onSaveHabit($event)"
   (cancel)="onCancelEdit()">
 </app-habit-form>

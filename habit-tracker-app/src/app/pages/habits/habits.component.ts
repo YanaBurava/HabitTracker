@@ -111,7 +111,7 @@ export class HabitsComponent implements OnInit {
     this.updatePagedHabits();
   }
 
-  onCancelEdit() {
+  onCancelEdit(): void {
     this.editingHabit = null;
   }
 
@@ -119,7 +119,7 @@ export class HabitsComponent implements OnInit {
     return this.habitService.getIconForGroup(group);
   }
 
-  objectKeys(obj: any): string[] {
-    return Object.keys(obj);
-  }
+  get habitGroups(): string[] {
+  return Object.keys(this.groupedHabits);
+}
 }

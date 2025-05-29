@@ -6,21 +6,21 @@
 
 <nav mat-tab-nav-bar class="tab-nav">
   <a mat-tab-link
-     routerLink="/today"
+     [routerLink]="routes.TODAY"
      routerLinkActive #rla1="routerLinkActive"
      [active]="rla1.isActive"
-     aria-label="Today">
+    aria-label="Today">
     <mat-icon>calendar_today</mat-icon>
   </a>
   <a mat-tab-link
-     routerLink="/habits"
+     [routerLink]="routes.HABITS"
      routerLinkActive #rla2="routerLinkActive"
      [active]="rla2.isActive"
      aria-label="Habits">
     <mat-icon>checklist</mat-icon>
   </a>
   <a mat-tab-link
-     routerLink="/focus"
+     [routerLink]="routes.FOCUS"
      routerLinkActive #rla3="routerLinkActive"
      [active]="rla3.isActive"
      aria-label="Focus">
@@ -33,13 +33,27 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
     <mat-nav-list>
-      <a mat-list-item routerLink="/" routerLinkActive="active"><mat-icon>home</mat-icon> Home</a>
-      <a mat-list-item routerLink="/habits" routerLinkActive="active"><mat-icon>checklist</mat-icon> Habits</a>
-      <a mat-list-item routerLink="/statistics" routerLinkActive="active"><mat-icon>bar_chart</mat-icon> Stats</a>
-      <a mat-list-item routerLink="/archive" routerLinkActive="active"><mat-icon>archive</mat-icon> Archive</a>
-      <a mat-list-item routerLink="/achievements" routerLinkActive="active"><mat-icon>emoji_events</mat-icon> Goals</a>
-      <a mat-list-item routerLink="/settings" routerLinkActive="active"><mat-icon>settings</mat-icon> Settings</a>
-      <a mat-list-item routerLink="/dictionary" routerLinkActive="active"><mat-icon>menu_book</mat-icon> Words</a>
+      <a mat-list-item [routerLink]="routes.HOME" routerLinkActive="active">
+        <mat-icon>home</mat-icon> Home
+      </a>
+      <a mat-list-item [routerLink]="routes.HABITS" routerLinkActive="active">
+        <mat-icon>checklist</mat-icon> Habits
+      </a>
+      <a mat-list-item [routerLink]="routes.STATISTICS" routerLinkActive="active">
+        <mat-icon>bar_chart</mat-icon> Stats
+      </a>
+      <a mat-list-item [routerLink]="routes.ARCHIVE" routerLinkActive="active">
+        <mat-icon>archive</mat-icon> Archive
+      </a>
+      <a mat-list-item [routerLink]="routes.ACHIEVEMENTS" routerLinkActive="active">
+        <mat-icon>emoji_events</mat-icon> Goals
+      </a>
+      <a mat-list-item [routerLink]="routes.SETTINGS" routerLinkActive="active">
+        <mat-icon>settings</mat-icon> Settings
+      </a>
+      <a mat-list-item [routerLink]="routes.DICTIONARY" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon> Words
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
