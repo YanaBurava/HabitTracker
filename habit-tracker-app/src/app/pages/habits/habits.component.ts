@@ -80,7 +80,7 @@ export class HabitsComponent implements OnInit {
       updatedHabit.id = this.habits.length + 1;
       this.habits.push(updatedHabit);
     } else {
-      const index = this.habits.findIndex(h => h.id === updatedHabit.id);
+      const index = this.habits.findIndex(habit => habit.id === updatedHabit.id);
       if (index !== -1) {
         this.habits[index] = updatedHabit;
       }
