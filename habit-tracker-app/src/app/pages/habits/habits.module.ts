@@ -21,7 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   { path: '', component: HabitsComponent }
 ];
@@ -53,6 +53,7 @@ const routes: Routes = [
     MatTooltipModule,
     MatPaginatorModule,
     MatDialogModule,
+    ReactiveFormsModule,
    RouterModule.forChild(routes)
   ]
 })

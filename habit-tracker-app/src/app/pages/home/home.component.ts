@@ -1,31 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { startOfWeek, endOfWeek, format } from 'date-fns';
+import { startOfWeek, endOfWeek, addWeeks, subWeeks, format } from 'date-fns';
+import { HabitService } from '../../services/today-habit.service';
+import { Habit } from '../../models/habit.model';
 
 @Component({
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
- currentDate!: string;
+  currentDate!: string;
   weather: any;
   wordOfTheDay: any;
+  currentWeekStart!: Date;
+  currentWeekEnd!: Date;
+  weekDates: string[] = [];
+
+  habits: Habit[] = [];
+
+  constructor(private habitService: HabitService) {}
 
   ngOnInit() {
-    const today = new Date();
-    this.currentDate = today.toLocaleDateString();
-    const weekStart = startOfWeek(today, { weekStartsOn: 1 }); 
-    const weekEnd = endOfWeek(today, { weekStartsOn: 1 }); 
+    this.currentDate = new Date().toLocaleDateString();
+    this.setCurrentWeek(new Date());
+    this.loadHabits();
+  }
 
-    // TODO заменить на реальный API
-    this.weather = {
-      temperature: 22,
-      description: 'Sunny'
-    };
-    this.wordOfTheDay = {
-      word: 'Ebullient',
-      definition: 'Cheerful and full of energy.'
-    };
+  setCurrentWeek(date: Date): void {
+    this.currentWeekStart = startOfWeek(date, { weekStartsOn: 1 });
+    this.currentWeekEnd = endOfWeek(date, { weekStartsOn: 1 });
+    this.weekDates = [];
+
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(this.currentWeekStart);
+      d.setDate(this.currentWeekStart.getDate() + i);
+      this.weekDates.push(this.habitService.formatDate(d));
+    }
+  }
+
+  previousWeek(): void {
+    const newStart = subWeeks(this.currentWeekStart, 1);
+    this.setCurrentWeek(newStart);
+  }
+
+  nextWeek(): void {
+    const newStart = addWeeks(this.currentWeekStart, 1);
+    this.setCurrentWeek(newStart);
+  }
+
+  loadHabits(): void {
+    this.habits = this.habitService.getActiveHabits();
+  }
+
+  isMarked(habit: Habit, dateStr: string): boolean {
+    return this.habitService.isMarkedDay(habit, dateStr);
+  }
+
+  toggleMark(habit: Habit, dateStr: string): void {
+    this.habitService.toggleMarkDay(habit, dateStr);
+  }
+
+  getProgress(habit: Habit): number {
+    const count = habit.progress.length;
+    return Math.min(100, Math.round((count / habit.goal) * 100));
   }
 }

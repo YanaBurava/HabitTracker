@@ -1,0 +1,123 @@
+.habit-card {
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 12px 26px;
+  margin-bottom: 14px;
+  transform-origin: top left;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(12, 2, 16, 0.26);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+   &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); 
+    transform: translateY(-1px);
+   }
+      transform: scale(0.9); 
+}
+.habit-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.habit-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.mark-today-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.25s ease;
+  color: white;
+  font-size: 20px;
+  padding: 0;
+  margin-right: 8px;
+
+  &.marked {
+    color: white;
+  }
+
+  &:not(.marked) {
+    color: transparent; // иконка скрыта если не отмечено
+  }
+
+  &:hover {
+    filter: brightness(85%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+}
+
+.habit-icon {
+  font-size: 28px;
+  color: #555;
+}
+
+.habit-name {
+  font-weight: 600;
+  font-size: 18px;
+  flex-grow: 1;
+}
+
+.habit-description {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.days-row {
+  display: flex;
+  gap: 8px;
+}
+
+.day-box {
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: #999;
+  transition: color 0.3s ease;
+
+  &.marked {
+    font-weight: 700;
+  }
+  .day-box {
+  width: 26px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: #999;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.marked {
+    color: white;
+  }
+}
+
+
+
+}

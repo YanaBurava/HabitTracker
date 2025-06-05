@@ -1,21 +1,61 @@
 .home {
-  padding: 20px;
+  padding: 1rem;
 }
 
-.weather, .word-of-the-day {
-  margin-bottom: 20px;
-}
-
-.active-habits ul {
-  list-style-type: none;
-}
-
-.active-habits li {
+.week-navigation {
   display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.active-habits .completed {
-  color: green;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+td {
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.colored-cell {
+  background-color: var(--habit-color, #e0f7e9); 
+  border-radius: 6px;
+}
+
+/* Прогресс бар */
+.progress-container {
+  background-color: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  height: 20px;
+}
+
+.progress-bar {
+  background-color: #a4dca5;
+  height: 100%;
+  transition: width 0.3s;
+}
+
+@media (max-width: 768px) {
+  .habit-table th,
+  .habit-table td {
+    padding: 4px;
+    font-size: 0.75rem;
+  }
 }

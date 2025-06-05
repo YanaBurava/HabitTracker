@@ -1,7 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { HabitService } from '../../services/habit.service';
 import { Habit } from '../../models/habit.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogData } from './confirm-dialog/confirm-dialog-data.interface';
+import { ConfirmDialogLabel } from './confirm-dialog/confirm-dialog-label.enum';
+
 
 @Component({
   selector: 'app-habits',
@@ -9,8 +15,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   templateUrl: './habits.component.html',
   styleUrl: './habits.component.scss'
 })
-
-export class HabitsComponent implements OnInit {
+export class HabitsComponent implements OnInit, OnDestroy {
   habits: Habit[] = [];
   groupedHabits: { [group: string]: Habit[] } = {};
   selectedGroup: string = 'All';
@@ -20,33 +25,42 @@ export class HabitsComponent implements OnInit {
   pageSize = 5;
   currentPageIndex = 0;
 
+  private subscription!: Subscription;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private habitService: HabitService) {}
+  constructor(private habitService: HabitService, private dialog: MatDialog) {}
 
-  ngOnInit(){
-    const rawHabits = this.habitService.getHabits();
-    this.habits = this.habitService.updateHabitStatuses(rawHabits);
-    this.groupedHabits = this.habitService.groupHabits(this.habits);
-    this.updatePagedHabits();
+  ngOnInit() {
+    this.subscription = this.habitService.habits$.subscribe(habits => {
+      this.habits = habits;
+      this.groupedHabits = this.habitService.groupHabits(habits);
+      this.updatePagedHabits();
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onSelectGroup(group: string) {
     this.selectedGroup = group;
     this.currentPageIndex = 0;
-    if (this.paginator) {
-      this.paginator.firstPage();
-    }
+    this.paginator?.firstPage();
     this.updatePagedHabits();
   }
 
   updatePagedHabits() {
-    const filteredHabits = this.selectedGroup === 'All'
+    const filteredByGroup = this.selectedGroup === 'All'
       ? this.habits
       : this.groupedHabits[this.selectedGroup] || [];
 
+    const filteredBySearch = filteredByGroup.filter(habit =>
+      habit.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+
     const startIndex = this.currentPageIndex * this.pageSize;
-    this.pagedHabits = filteredHabits.slice(startIndex, startIndex + this.pageSize);
+    this.pagedHabits = filteredBySearch.slice(startIndex, startIndex + this.pageSize);
   }
 
   onPageChange(event: PageEvent) {
@@ -78,52 +92,59 @@ export class HabitsComponent implements OnInit {
   onSaveHabit(updatedHabit: Habit) {
     if (updatedHabit.id === 0) {
       updatedHabit.id = this.habits.length + 1;
-      this.habits.push(updatedHabit);
+      this.habitService.addHabit(updatedHabit);
     } else {
-      const index = this.habits.findIndex(habit => habit.id === updatedHabit.id);
-      if (index !== -1) {
-        this.habits[index] = updatedHabit;
-      }
+      this.habitService.updateHabit(updatedHabit);
     }
 
-    this.habits = this.habitService.updateHabitStatuses(this.habits);
-    this.groupedHabits = this.habitService.groupHabits(this.habits);
+    this.paginator?.firstPage();
     this.currentPageIndex = 0;
-
-    if (this.paginator) {
-      this.paginator.firstPage();
-    }
-
-    this.updatePagedHabits();
     this.editingHabit = null;
   }
 
   handleDelete(habitToDelete: Habit) {
-    this.habits = this.habits.filter(habit => habit.id !== habitToDelete.id);
-    this.habits = this.habitService.updateHabitStatuses(this.habits);
-    this.groupedHabits = this.habitService.groupHabits(this.habits);
-    this.currentPageIndex = 0;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Delete Habit',
+        message: `Are you sure you want to delete "${habitToDelete.name}"?`,
+        confirmLabel: 'Delete',
+        cancelLabel: 'Cancel'
+      } as ConfirmDialogData
+    });
 
-    if (this.paginator) {
-      this.paginator.firstPage();
-    }
-
-    this.updatePagedHabits();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.habitService.deleteHabit(habitToDelete.id);
+        this.habits = this.habitService.updateHabitStatuses(this.habitService.getHabits());
+        this.groupedHabits = this.habitService.groupHabits(this.habits);
+        this.currentPageIndex = 0;
+        this.paginator?.firstPage();
+        this.updatePagedHabits();
+      }
+    });
   }
 
   onCancelEdit(): void {
     this.editingHabit = null;
   }
 
- getIconForGroup(group: string): string {
+  getIconForGroup(group: string): string {
     return this.habitService.getIconForGroup(group);
   }
 
   get habitGroups(): string[] {
-  return Object.keys(this.groupedHabits);
-}
+    return Object.keys(this.groupedHabits);
+  }
 
-isGroupSelected(group: string): 'primary' | '' {
-  return this.selectedGroup === group ? 'primary' : '';
-}
+  isGroupSelected(group: string): 'primary' | '' {
+    return this.selectedGroup === group ? 'primary' : '';
+  }
+
+  searchTerm = '';
+
+  onSearchChange() {
+    this.currentPageIndex = 0;
+    this.updatePagedHabits();
+  }
 }

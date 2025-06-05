@@ -1,24 +1,27 @@
 <div class="top-bar">
   <div class="group-filter groups-wrapper">
-    <button
-      mat-button
-      [color]="selectedGroup === 'All' ? 'primary' : ''"
-      (click)="onSelectGroup('All')"
-      class="group-btn">
+    <button mat-button
+            [color]="selectedGroup === 'All' ? 'primary' : ''"
+            (click)="onSelectGroup('All')"
+            class="group-btn">
       <mat-icon>list</mat-icon>
       <span>All</span>
     </button>
 
-    <button
-      *ngFor="let group of habitGroups"
-      mat-button
-      [color]="isGroupSelected(group)"
-      (click)="onSelectGroup(group)"
-      class="group-btn">
+    <button *ngFor="let group of habitGroups"
+            mat-button
+            [color]="isGroupSelected(group)"
+            (click)="onSelectGroup(group)"
+            class="group-btn">
       <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
       <span>{{ group }}</span>
     </button>
   </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Search habits</mat-label>
+    <input matInput placeholder="Enter habit name" [(ngModel)]="searchTerm" (input)="onSearchChange()" />
+  </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="onAddHabit()" class="add-button">
     Add Habit
