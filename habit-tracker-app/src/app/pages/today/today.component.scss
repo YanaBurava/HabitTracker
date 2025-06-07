@@ -48,10 +48,6 @@
     color: white;
   }
 
-  &:not(.marked) {
-    color: transparent; // иконка скрыта если не отмечено
-  }
-
   &:hover {
     filter: brightness(85%);
   }
