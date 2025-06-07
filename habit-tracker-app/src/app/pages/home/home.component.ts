@@ -21,11 +21,24 @@ export class HomeComponent implements OnInit {
 
   constructor(private habitService: HabitService) {}
 
-  ngOnInit() {
-    this.setCurrentDate();
-    this.setCurrentWeek(new Date());
-    this.loadHabits();
-  }
+ngOnInit() {
+  const today = new Date();
+  this.currentDate = today.toLocaleDateString();
+
+  this.weather = {
+    temperature: 22,
+    description: 'Sunny'
+  };
+
+  this.wordOfTheDay = {
+    word: 'Ebullient',
+    definition: 'Cheerful and full of energy.'
+  };
+
+  this.setCurrentDate();
+  this.setCurrentWeek(new Date());
+  this.loadHabits();
+}
 
    setCurrentDate(): void {
     this.currentDate = format(new Date(), 'yyyy-MM-dd');
