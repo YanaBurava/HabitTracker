@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TodayRoutingModule } from './today-routing.module';
 import { TodayComponent } from './today.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TodayComponent } from './today.component';
   ],
   imports: [
     CommonModule,
-    TodayRoutingModule
+    TodayRoutingModule,
+    MatIconModule
   ]
 })
 export class TodayModule { }
