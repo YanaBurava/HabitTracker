@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-word-of-the-day',
   standalone: false,
   templateUrl: './word-of-the-day.component.html',
-  styleUrl: './word-of-the-day.component.css'
+  styleUrl: './word-of-the-day.component.scss'
 })
 export class WordOfTheDayComponent {
 

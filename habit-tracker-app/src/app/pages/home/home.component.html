@@ -17,11 +17,5 @@
 
   <div class="active-habits">
     <h2>Active Habits for the Week</h2>
-    <ul>
-      <li *ngFor="let habit of activeHabits">
-        <span>{{ habit.name }}</span>
-        <span [class.completed]="habit.completed">✔️</span>
-      </li>
-    </ul>
   </div>
 </div>

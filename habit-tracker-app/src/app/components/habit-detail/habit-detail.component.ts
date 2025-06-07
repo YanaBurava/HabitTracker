@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-habit-detail',
   standalone: false,
   templateUrl: './habit-detail.component.html',
-  styleUrl: './habit-detail.component.css'
+  styleUrl: './habit-detail.component.scss'
 })
 export class HabitDetailComponent {
  habitId: number | null = null;

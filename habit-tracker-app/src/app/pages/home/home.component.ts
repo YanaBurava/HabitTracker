@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { startOfWeek, endOfWeek, format } from 'date-fns';
 
 @Component({
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
  currentDate!: string;
   weather: any;
   wordOfTheDay: any;
-  activeHabits = [
-    { name: 'Exercise', completed: true },
-    { name: 'Read', completed: false },
-    { name: 'Meditate', completed: true }
-  ];
 
   ngOnInit() {
     const today = new Date();
     this.currentDate = today.toLocaleDateString();
+    const weekStart = startOfWeek(today, { weekStartsOn: 1 }); 
+    const weekEnd = endOfWeek(today, { weekStartsOn: 1 }); 
 
-    // заменить на реальный API
+    // TODO заменить на реальный API
     this.weather = {
       temperature: 22,
       description: 'Sunny'

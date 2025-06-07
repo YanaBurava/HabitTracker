@@ -1,17 +1,63 @@
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-logo">🧠 HabitFlow</div>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+<mat-toolbar color="primary" class="main-toolbar">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="toolbar-title">🧠 HabitFlow</span>
 
-    <ul class="navbar-menu">
-      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/habits" routerLinkActive="active">Habits</a></li>
-      <li><a routerLink="/statistics" routerLinkActive="active">Stats</a></li>
-      <li><a routerLink="/archive" routerLinkActive="active">Archive</a></li>
-      <li><a routerLink="/achievements" routerLinkActive="active">Goals</a></li>
-      <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
-      <li><a routerLink="/dictionary" routerLinkActive="active">Words</a></li>
-    </ul>
-  </div>
+<nav mat-tab-nav-bar class="tab-nav">
+  <a mat-tab-link
+     [routerLink]="routes.TODAY"
+     routerLinkActive #rla1="routerLinkActive"
+     [active]="rla1.isActive"
+    aria-label="Today">
+    <mat-icon>calendar_today</mat-icon>
+  </a>
+  <a mat-tab-link
+     [routerLink]="routes.HABITS"
+     routerLinkActive #rla2="routerLinkActive"
+     [active]="rla2.isActive"
+     aria-label="Habits">
+    <mat-icon>checklist</mat-icon>
+  </a>
+  <a mat-tab-link
+     [routerLink]="routes.FOCUS"
+     routerLinkActive #rla3="routerLinkActive"
+     [active]="rla3.isActive"
+     aria-label="Focus">
+    <mat-icon>center_focus_strong</mat-icon>
+  </a>
 </nav>
+
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="routes.HOME" routerLinkActive="active">
+        <mat-icon>home</mat-icon> Home
+      </a>
+      <a mat-list-item [routerLink]="routes.HABITS" routerLinkActive="active">
+        <mat-icon>checklist</mat-icon> Habits
+      </a>
+      <a mat-list-item [routerLink]="routes.STATISTICS" routerLinkActive="active">
+        <mat-icon>bar_chart</mat-icon> Stats
+      </a>
+      <a mat-list-item [routerLink]="routes.ARCHIVE" routerLinkActive="active">
+        <mat-icon>archive</mat-icon> Archive
+      </a>
+      <a mat-list-item [routerLink]="routes.ACHIEVEMENTS" routerLinkActive="active">
+        <mat-icon>emoji_events</mat-icon> Goals
+      </a>
+      <a mat-list-item [routerLink]="routes.SETTINGS" routerLinkActive="active">
+        <mat-icon>settings</mat-icon> Settings
+      </a>
+      <a mat-list-item [routerLink]="routes.DICTIONARY" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon> Words
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

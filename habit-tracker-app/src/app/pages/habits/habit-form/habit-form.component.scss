@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-slide-toggle {
+  margin-top: 8px;
+}
+
+button {
+  align-self: flex-end;
+  margin-left: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+button.save {
+  background-color: #4caf50;
+  color: white;
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+button.cancel {
+  background-color: #f44336;
+  color: white;
+  &:hover {
+    background-color: #d32f2f;
+  }
+}
+.icon-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+
+  mat-icon {
+    font-size: 24px;
+    color: #666;
+  }
+}

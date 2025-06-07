@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-achievements',
   standalone: false,
   templateUrl: './achievements.component.html',
-  styleUrl: './achievements.component.css'
+  styleUrl: './achievements.component.scss'
 })
 export class AchievementsComponent {
 
