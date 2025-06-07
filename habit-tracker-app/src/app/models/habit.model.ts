@@ -4,7 +4,7 @@ export interface Habit {
   description?: string;
   icon: string;
   color: string;
-   progress: string[];
+  progress: string[];
   goal: number;
   group: string;
   isActive: boolean;

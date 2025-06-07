@@ -22,11 +22,14 @@ export class HomeComponent implements OnInit {
   constructor(private habitService: HabitService) {}
 
   ngOnInit() {
-    this.currentDate = new Date().toLocaleDateString();
+    this.setCurrentDate();
     this.setCurrentWeek(new Date());
     this.loadHabits();
   }
 
+   setCurrentDate(): void {
+    this.currentDate = format(new Date(), 'yyyy-MM-dd');
+  }
   setCurrentWeek(date: Date): void {
     this.currentWeekStart = startOfWeek(date, { weekStartsOn: 1 });
     this.currentWeekEnd = endOfWeek(date, { weekStartsOn: 1 });
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
       d.setDate(this.currentWeekStart.getDate() + i);
       this.weekDates.push(this.habitService.formatDate(d));
     }
+    this.loadHabits();
   }
 
   previousWeek(): void {
@@ -50,7 +54,8 @@ export class HomeComponent implements OnInit {
   }
 
   loadHabits(): void {
-    this.habits = this.habitService.getActiveHabits();
+    const allActiveHabits = this.habitService.getActiveHabits();
+    this.habits = this.habitService.filterHabitsByWeek(allActiveHabits, this.currentWeekStart, this.currentWeekEnd);
   }
 
   isMarked(habit: Habit, dateStr: string): boolean {

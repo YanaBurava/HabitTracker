@@ -25,10 +25,6 @@ export class HabitService {
     this.habitsSubject.next(updated);
   }
 
-  getHabits(): Habit[] {
-    return this.habitsSubject.getValue();
-  }
-
   updateHabitStatuses(habits: Habit[]): Habit[] {
     const now = new Date();
     return habits.map(habit => ({
@@ -36,6 +32,10 @@ export class HabitService {
       isActive: habit.startDate <= now && (!habit.endDate || habit.endDate >= now),
       isExpired: habit.endDate ? habit.endDate < now : false
     }));
+  }
+
+  getHabits(): Habit[] {
+    return this.habitsSubject.getValue();
   }
 
   groupHabits(habits: Habit[]): { [group: string]: Habit[] } {
