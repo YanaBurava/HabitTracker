@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-@NgModule({
-  declarations: [HomeComponent],
+import { WeatherComponent } from '../../components/weather/weather.component'; @NgModule({
+  declarations: [HomeComponent, WeatherComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

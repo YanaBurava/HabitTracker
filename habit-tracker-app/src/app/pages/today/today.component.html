@@ -11,7 +11,7 @@
   </button>
 
   <mat-icon class="habit-icon">{{ habit.icon }}</mat-icon>
-  <span class="habit-name">{{ habit.name }}</span>
+  <span class="habit-name" (click)="goToHabitDetail(habit)">{{ habit.name }}</span>
 
   <div class="habit-progress" [class.goal-reached]="hasReachedGoal(habit)">
     {{ getProgressText(habit) }}

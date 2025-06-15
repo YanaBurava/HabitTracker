@@ -6,8 +6,7 @@
   </div>
 
   <div class="weather">
-    <p>Weather: <span>{{ weather?.temperature }}°C</span></p>
-    <p>{{ weather?.description }}</p>
+<app-weather></app-weather>
   </div>
 
   <div class="word-of-the-day">
@@ -35,7 +34,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let habit of habits">
-          <td>{{ habit.name }}</td>
+          <td (click)="goToHabitDetail(habit)">{{ habit.name }}</td>
           <td
             *ngFor="let date of weekDates"
             [ngStyle]="{
