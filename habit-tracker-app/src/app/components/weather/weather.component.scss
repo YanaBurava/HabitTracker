@@ -1,0 +1,41 @@
+.weather-card {
+  width: 280px;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  margin: 20px auto;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  .weather-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .weather-temp {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+  }
+
+  .weather-info {
+    margin-top: 10px;
+    p {
+      margin: 4px 0;
+      font-size: 1rem;
+    }
+  }
+}
