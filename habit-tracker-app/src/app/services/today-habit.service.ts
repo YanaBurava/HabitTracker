@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 @Injectable({
   providedIn: 'root'
 })
-export class HabitService {
+export class HabitsService {
   private STORAGE_KEY = 'habitProgress';
 
   loadStoredProgress(): Record<string, string[]> {
@@ -102,7 +102,10 @@ updateHabitStatuses(habits: Habit[]): Habit[] {
   const doneCount = habit.progress.length;
   return `${doneCount}/${habit.goal}`;
 }
-
+ getHabitById(id: number): Habit | null {
+  const habit = this.getHabits().find(habit => habit.id === id);
+  return habit || null;
+}
 filterHabitsByWeek(habits: Habit[], weekStart: Date, weekEnd: Date): Habit[] {
     const MAX_DATE = new Date('9999-12-31T23:59:59.999Z');
     return habits.filter(habit => {
@@ -111,5 +114,6 @@ filterHabitsByWeek(habits: Habit[], weekStart: Date, weekEnd: Date): Habit[] {
 
     return startDate <= weekEnd && endDate >= weekStart;
   });
+  
 }
 }

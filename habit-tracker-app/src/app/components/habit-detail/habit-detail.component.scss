@@ -1,0 +1,80 @@
+h2 {
+  color: #007bff;
+}
+p {
+  font-size: 16px;
+  margin: 4px 0;
+}
+.calendar-container {
+  margin-top: 20px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  gap: 8px;
+  justify-content: center;
+}
+
+.day-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.completed {
+  background-color: #4caf50; // Material Green 500
+}
+
+.not-completed {
+  background-color: #bdbdbd; // Material Gray 400
+}
+
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-grid div {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #ddd;
+}
+
+.calendar-grid .marked {
+  background-color: #5a7e5b;
+  color: white;
+}
+
+.calendar-grid .empty {
+  background-color: #ccc;
+}

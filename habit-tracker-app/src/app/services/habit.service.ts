@@ -76,4 +76,9 @@ export class HabitService {
     const updatedHabits = this.getHabits().filter(h => h.id !== habitId);
     this.setHabits(updatedHabits);
   }
+
+ getHabitById(id: number): Habit | null {
+  const habit = this.getHabits().find(h => h.id === id);
+  return habit || null;
+}
 }
