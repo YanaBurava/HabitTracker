@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  justify-content: center;  
+  margin: 20px 0;
+}
+
+canvas {
+  max-width: 700px;   
+  max-height: 700px;  
+  width: 200%;        
+  height: auto;      
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);  
+  border-radius: 8px; 
+}
