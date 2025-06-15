@@ -1,0 +1,7 @@
+<div *ngIf="radarChartData">
+  <canvas baseChart
+          [data]="radarChartData" 
+          [options]="radarChartOptions"
+          [type]="'radar'">
+  </canvas>
+</div>
