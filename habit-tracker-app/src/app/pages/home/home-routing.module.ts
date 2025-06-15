@@ -5,7 +5,7 @@ import {HabitDetailComponent } from '../../components/habit-detail/habit-detail.
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-   { path: 'detail/:id', component: HabitDetailComponent }
+   { path: 'habit/:id', component: HabitDetailComponent }
 ];
 
 @NgModule({

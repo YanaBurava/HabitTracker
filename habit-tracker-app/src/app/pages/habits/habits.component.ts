@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogData } from './confirm-dialog/confirm-dialog-data.interface';
 import { ConfirmDialogLabel } from './confirm-dialog/confirm-dialog-label.enum';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-habits',
@@ -29,8 +29,7 @@ export class HabitsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private habitService: HabitService, private dialog: MatDialog) {}
-
+constructor(private habitService: HabitService, private dialog: MatDialog, private router: Router) {}
   ngOnInit() {
     this.subscription = this.habitService.habits$.subscribe(habits => {
       this.habits = habits;
@@ -147,4 +146,5 @@ export class HabitsComponent implements OnInit, OnDestroy {
     this.currentPageIndex = 0;
     this.updatePagedHabits();
   }
+
 }

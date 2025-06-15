@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Habit } from '../../models/habit.model';
-import { HabitService } from '../../services/today-habit.service';
+import { HabitsService } from '../../services/today-habit.service';
 import { startOfWeek, addDays } from 'date-fns';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-today',
@@ -16,7 +17,7 @@ export class TodayComponent implements OnInit {
   todayDateStr: string = '';
   currentDayIndex: number = 0;
 
-  constructor(private habitService: HabitService) {}
+  constructor(private habitService: HabitsService, private router: Router) {}
 
   ngOnInit(): void {
     this.todayDateStr = this.habitService.formatDate(new Date());
@@ -65,5 +66,8 @@ hasReachedGoal(habit: Habit): boolean {
 getCurrentDayIndex(): number {
   const todayISO = this.todayDateStr;
   return this.daysISO.findIndex(d => d === todayISO);
+}
+ goToHabitDetail(habit: Habit) {
+  this.router.navigate(['/habit', habit.id]);
 }
 }

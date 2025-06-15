@@ -29,13 +29,14 @@
 </div>
 
 <div class="habit-list" *ngIf="!editingHabit">
+<div *ngFor="let habit of pagedHabits">
   <app-habit-card
-    *ngFor="let habit of pagedHabits"
     [habit]="habit"
     (edit)="onEditHabit(habit)"
     (delete)="handleDelete(habit)"
     [class.active-habit]="habit.isActive">
   </app-habit-card>
+</div>
 
   <mat-paginator
     [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup].length || 0)"
@@ -52,3 +53,4 @@
   (save)="onSaveHabit($event)"
   (cancel)="onCancelEdit()">
 </app-habit-form>
+
