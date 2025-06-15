@@ -1,1 +1,7 @@
-<p>statistics works!</p>
+<h1>Progress</h1>
+
+<div cdkDropList class="drag-container" (cdkDropListDropped)="drop($event)">
+  <div cdkDrag>
+    <app-radar-chart [habits]="habits"></app-radar-chart>
+  </div>
+</div>
