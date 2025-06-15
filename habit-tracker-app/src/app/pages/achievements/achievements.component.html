@@ -1,1 +1,22 @@
-<p>achievements works!</p>
+<div class="achievements-container">
+  <h2 class="title">🏆 Achievements </h2>
+
+  <div *ngIf="achievedHabits.length === 0">
+    <p>"There's no achieved habit yet — but you're on the right track!"</p>
+  </div>
+
+  <div class="achievements-grid">
+    <div
+      class="achievement-card"
+      *ngFor="let habit of achievedHabits"
+      (click)="goToHabitDetail(habit)"
+    >
+      <div class="icon-wrapper">
+        <span class="material-icons">emoji_events</span>
+      </div>
+      <h3>{{ habit.name }}</h3>
+      <p>Goal: {{ habit.goal }}</p>
+      <p>Achievement: {{ habit.progress.length }} / {{ habit.goal }}</p>
+    </div>
+  </div>
+</div>
