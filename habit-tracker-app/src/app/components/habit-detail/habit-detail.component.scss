@@ -1,41 +1,14 @@
 h2 {
   color: #007bff;
 }
+
 p {
   font-size: 16px;
   margin: 4px 0;
 }
+
 .calendar-container {
   margin-top: 20px;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 40px);
-  gap: 8px;
-  justify-content: center;
-}
-
-.day-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  font-size: 14px;
-  color: #fff;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-.completed {
-  background-color: #4caf50; // Material Green 500
-}
-
-.not-completed {
-  background-color: #bdbdbd; // Material Gray 400
 }
 
 
@@ -43,38 +16,62 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
+  max-width: 350px;   // 7 колонок * 48px + gaps
+  margin-left: auto;
+  margin-right: auto;
 
   button {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
+    color: #333;
+    padding: 0;
+    line-height: 1;
+    user-select: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #007bff;
+    }
   }
 }
 
+
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(7, 48px);  
+  gap: 6px;                             
+  justify-content: center;
+  max-width: 350px;                    
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
+
 .calendar-grid div {
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: #ddd;
-}
-
-.calendar-grid .marked {
-  background-color: #5a7e5b;
+  border-radius: 8px;
+  font-size: 16px;                      
   color: white;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.3s ease;
 }
 
-.calendar-grid .empty {
+
+.marked {
+  background-color: var(--habit-color, #4caf50);
+}
+
+
+.empty {
   background-color: #ccc;
+  color: #666;
 }

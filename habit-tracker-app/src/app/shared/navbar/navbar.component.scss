@@ -1,54 +1,68 @@
 //* main-toolbar стили */
 .main-toolbar {
-  background: linear-gradient(90deg, #5c5ce6, #7f7ffb);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  color: #2e2e2e;
+  background: linear-gradient(90deg, #717388 0%, #EFDADD 100%);
+  box-shadow: 0 5px 14px rgba(113, 115, 136, 0.4);
+  color: #505170; // темный оттенок для текста — чтобы не сливаться с Primrose Pink
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
   font-size: 1.15rem;
-  padding: 0 16px;
+  padding: 0 20px;
 
   .toolbar-title {
-    margin-left: 12px;
+    margin-left: 14px;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     user-select: none;
-    text-shadow: 1px 1px 2px rgba(236, 226, 226, 0.858); 
+    color: #505170;
+    text-shadow: 1px 1px 2px rgba(239, 218, 221, 0.8);
   }
 
   nav.tab-nav {
     margin-left: auto;
     display: flex;
-    gap: 16px;
+    gap: 18px;
 
     a.mat-tab-link {
-      color: #2e2e2e;
+      color: #505170;
       font-weight: 600;
       font-size: 1rem;
-      padding: 8px 14px;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+      padding: 9px 16px;
+      border-radius: 12px;
+      transition: all 0.35s ease;
+      box-shadow: 0 2px 8px rgba(113, 115, 136, 0.25);
+
       mat-icon {
-        color: #2e2e2e;
+        color: #505170;
         transition: color 0.3s ease;
-        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+        filter: drop-shadow(0 1px 1px rgba(239, 218, 221, 0.4));
       }
 
-      &.mat-tab-link-active,
       &:hover {
-        background: #f8c7b9;
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25); 
+        background: #717388;  // синий для контраста на светлом фоне
+        color: #EFDADD;
+        box-shadow: 0 4px 12px rgba(113, 115, 136, 0.7);
 
         mat-icon {
-          color: #fff; 
-          filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+          color: #EFDADD;
+          filter: drop-shadow(0 0 6px rgba(239, 218, 221, 0.9));
+        }
+      }
+
+      &.mat-tab-link-active {
+        background: #717388;
+        color: #EFDADD;
+        box-shadow: 0 6px 20px rgba(113, 115, 136, 0.8);
+
+        mat-icon {
+          color: #EFDADD;
+          filter: drop-shadow(0 0 12px rgba(239, 218, 221, 1));
         }
       }
     }
   }
 }
+
+
 
 /* sidenav стили */
 .sidenav {
