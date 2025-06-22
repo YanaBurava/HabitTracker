@@ -15,8 +15,4 @@
   <div class="weather-info">
     <p><strong>{{ weatherData.name }}, {{ weatherData.sys.country }}</strong></p>
     <p>{{ weatherData.weather[0].description | titlecase }}</p>
-    <p>🌅 Sunrise: {{ getTime(weatherData.sys.sunrise) }}</p>
-    <p>🌇 Sunset: {{ getTime(weatherData.sys.sunset) }}</p>
-    <p>🌬 Wind: {{ weatherData.wind.speed }} m/s</p>
-  </div>
 </div>
