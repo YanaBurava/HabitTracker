@@ -54,11 +54,11 @@ generateMonthDays(): void {
 
   isMarked(day: Date): boolean {
     if (!this.habit) return false;
-    const dateStr = this.habitService.formatDate(day); // e.g., '2024-06-07'
+    const dateStr = this.habitService.formatDate(day); 
     return this.habitService.isMarkedDay(this.habit, dateStr);
   }
 
   getMonthLabel(): string {
-    return format(this.currentMonth, 'MMMM yyyy'); // e.g., "June 2025"
+    return format(this.currentMonth, 'MMMM yyyy'); 
   }
 }

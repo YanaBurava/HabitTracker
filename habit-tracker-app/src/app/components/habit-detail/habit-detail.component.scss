@@ -1,23 +1,39 @@
-h2 {
-  color: #007bff;
-}
+.habit-details {
+  padding: 20px;              
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  margin-bottom: 40px;
 
-p {
-  font-size: 16px;
-  margin: 4px 0;
+  h2 {
+    color: #12142eab;
+    font-weight: 700;
+    font-size: 2rem;
+    margin: 0 0 20px 0;      
+  }
+
+  p {
+    font-size: 16px;
+    margin: 8px 0;         
+
+    strong {
+      color: #333;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+  }
 }
 
 .calendar-container {
-  margin-top: 20px;
+  margin-top: 60px;
 }
-
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  max-width: 350px;   // 7 колонок * 48px + gaps
+  max-width: 350px;
   margin-left: auto;
   margin-right: auto;
 
@@ -33,22 +49,24 @@ p {
     transition: color 0.3s ease;
 
     &:hover {
-      color: #007bff;
+      color: #1b183b94;
     }
+  }
+
+  h2 {
+    margin: 0;
   }
 }
 
-
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 48px);  
-  gap: 6px;                             
+  grid-template-columns: repeat(7, 48px);
+  gap: 6px;
   justify-content: center;
-  max-width: 350px;                    
+  max-width: 350px;
   margin: 0 auto;
   box-sizing: border-box;
 }
-
 
 .calendar-grid div {
   width: 48px;
@@ -57,21 +75,66 @@ p {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  font-size: 16px;                      
+  font-size: 16px;
   color: white;
   cursor: pointer;
   user-select: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   transition: background-color 0.3s ease;
+  padding: 4px; 
 }
-
 
 .marked {
   background-color: var(--habit-color, #4caf50);
 }
 
-
 .empty {
   background-color: #ccc;
   color: #666;
+}
+
+@media (max-width: 480px) {
+  .habit-details {
+    padding: 10px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 6px 0;
+    }
+  }
+
+  .calendar-container {
+    margin-top: 20px;
+  }
+
+  .calendar-header {
+    max-width: 100%;
+    padding: 0 10px;
+
+    button {
+      font-size: 1.4rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .calendar-grid {
+    max-width: 100%;
+    grid-template-columns: repeat(7, 36px); 
+    gap: 4px;
+  }
+
+  .calendar-grid div {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    padding: 2px;
+  }
 }

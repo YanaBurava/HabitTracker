@@ -1,11 +1,12 @@
-<div *ngIf="habit?.name; else notFound">
+<div class="habit-details">
+@if (habit?.name) {
   <h2>{{ habit?.name }}</h2>
-  <p><strong>Group:</strong> {{ habit?.group }}</p>
-  <p><strong>Goal:</strong> {{ habit?.goal }}</p>
+  <p><strong>Group:</strong> {{ habit?.group}}</p>
+  <p><strong>Goal:</strong> {{ habit?.goal}}</p>
 
-<div class="calendar-header">
+  <div class="calendar-header">
     <button (click)="previousMonth()">&#8592;</button>
-    <span>{{ getMonthLabel() }}</span>
+    <h2>{{ getMonthLabel() }}</h2>
     <button (click)="nextMonth()">&#8594;</button>
   </div>
 
@@ -20,8 +21,8 @@
       {{ day | date: 'd' }}
     </div>
   </div>
-</div>
 
-<ng-template #notFound>
+} @else {
   <p>Habit not found.</p>
-</ng-template>
+}
+</div>

@@ -36,7 +36,7 @@ mat-calendar {
   max-width: 70%;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  background: #ffffffcc; /* легкий белый с прозрачностью */
+  background: #ffffffcc; 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -45,7 +45,7 @@ app-weather {
   flex-shrink: 0;
   margin: 0 1rem;
 
-  /* приглушённый стиль карточки погоды */
+  
   .weather-card {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -65,7 +65,7 @@ app-weather {
   .weather-temp {
     font-size: 3rem;
     font-weight: 600;
-    color: #ddd; /* чуть светлее, но не ярко-белый */
+    color: #ddd; 
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
@@ -117,13 +117,13 @@ app-weather {
   border-collapse: separate;
   border-spacing: 0 6px;
   font-size: 0.85rem;
-  background-color: transparent; /* фон теперь у обертки */
+  background-color: transparent; 
 }
 
 table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 6px; /* уменьшен отступ между строками */
+  border-spacing: 0 6px; 
   font-size: 0.85rem;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
   background-color: rgba(255, 255, 255, 0.85);
@@ -142,8 +142,8 @@ th, td {
 
 th {
   background: linear-gradient(180deg,
-    rgba(246, 209, 193, 0.85) 0%,   /* Primrose Pink */
-    rgba(108, 160, 220, 0.85) 100%  /* Vapor Blue */
+    rgba(246, 209, 193, 0.85) 0%,   
+    rgba(108, 160, 220, 0.85) 100% 
   );
   color: rgba(255, 255, 255, 0.95);
   font-weight: 600;

@@ -2,9 +2,16 @@
   <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="toolbar-title">🧠 HabitFlow</span>
+  <span class="toolbar-title">HabitsFlow</span>
 
 <nav mat-tab-nav-bar class="tab-nav">
+    <a mat-tab-link
+     [routerLink]="routes.FOCUS"
+     routerLinkActive #rla3="routerLinkActive"
+     [active]="rla3.isActive"
+     aria-label="Focus">
+    <mat-icon>center_focus_strong</mat-icon>
+  </a>
   <a mat-tab-link
      [routerLink]="routes.TODAY"
      routerLinkActive #rla1="routerLinkActive"
@@ -19,15 +26,7 @@
      aria-label="Habits">
     <mat-icon>checklist</mat-icon>
   </a>
-  <a mat-tab-link
-     [routerLink]="routes.FOCUS"
-     routerLinkActive #rla3="routerLinkActive"
-     [active]="rla3.isActive"
-     aria-label="Focus">
-    <mat-icon>center_focus_strong</mat-icon>
-  </a>
 </nav>
-
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
@@ -40,19 +39,10 @@
         <mat-icon>checklist</mat-icon> Habits
       </a>
       <a mat-list-item [routerLink]="routes.STATISTICS" routerLinkActive="active">
-        <mat-icon>bar_chart</mat-icon> Stats
-      </a>
-      <a mat-list-item [routerLink]="routes.ARCHIVE" routerLinkActive="active">
-        <mat-icon>archive</mat-icon> Archive
+        <mat-icon>bar_chart</mat-icon> Statistics
       </a>
       <a mat-list-item [routerLink]="routes.ACHIEVEMENTS" routerLinkActive="active">
-        <mat-icon>emoji_events</mat-icon> Goals
-      </a>
-      <a mat-list-item [routerLink]="routes.SETTINGS" routerLinkActive="active">
-        <mat-icon>settings</mat-icon> Settings
-      </a>
-      <a mat-list-item [routerLink]="routes.DICTIONARY" routerLinkActive="active">
-        <mat-icon>menu_book</mat-icon> Words
+        <mat-icon>emoji_events</mat-icon> Achievements
       </a>
     </mat-nav-list>
   </mat-sidenav>

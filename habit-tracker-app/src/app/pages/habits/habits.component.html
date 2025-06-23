@@ -1,3 +1,4 @@
+<div *ngIf="!editingHabit">
 <div class="top-bar">
   <div class="group-filter groups-wrapper">
     <button mat-button
@@ -8,17 +9,21 @@
       <span>All</span>
     </button>
 
-    <button *ngFor="let group of habitGroups"
-            mat-button
-            [color]="isGroupSelected(group)"
-            (click)="onSelectGroup(group)"
-            class="group-btn">
-      <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
-      <span>{{ group }}</span>
-    </button>
+<button *ngFor="let group of habitGroups"
+        mat-button
+        [color]="isGroupSelected(group)"
+        (click)="onSelectGroup(group)"
+        class="group-btn"
+        [matTooltip]="group" matTooltipPosition="above" matTooltipShowDelay="300">
+  <div class="group-icon">
+    <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
+  </div>
+</button>
+  </div>
   </div>
 
-  <mat-form-field appearance="outline">
+  <div class="filters-search">
+  <mat-form-field appearance="outline" class="search-field">
     <mat-label>Search habits</mat-label>
     <input matInput placeholder="Enter habit name" [(ngModel)]="searchTerm" (input)="onSearchChange()" />
   </mat-form-field>
@@ -26,8 +31,8 @@
   <button mat-raised-button color="primary" (click)="onAddHabit()" class="add-button">
     Add Habit
   </button>
+  </div>
 </div>
-
 <div class="habit-list" *ngIf="!editingHabit">
 <div *ngFor="let habit of pagedHabits">
   <app-habit-card

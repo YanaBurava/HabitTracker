@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ConfirmDialogData } from './confirm-dialog/confirm-dialog-data.interface';
 import { ConfirmDialogLabel } from './confirm-dialog/confirm-dialog-label.enum';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-habits',
@@ -22,7 +23,7 @@ export class HabitsComponent implements OnInit, OnDestroy {
   pagedHabits: Habit[] = [];
   editingHabit: Habit | null = null;
   readonly pageSizeOptions = [5, 10, 25];
-  pageSize = 5;
+  pageSize = 10;
   currentPageIndex = 0;
 
   private subscription!: Subscription;
@@ -39,7 +40,7 @@ constructor(private habitService: HabitService, private dialog: MatDialog, priva
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   onSelectGroup(group: string) {
@@ -112,16 +113,18 @@ constructor(private habitService: HabitService, private dialog: MatDialog, priva
       } as ConfirmDialogData
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.habitService.deleteHabit(habitToDelete.id);
-        this.habits = this.habitService.updateHabitStatuses(this.habitService.getHabits());
-        this.groupedHabits = this.habitService.groupHabits(this.habits);
-        this.currentPageIndex = 0;
-        this.paginator?.firstPage();
-        this.updatePagedHabits();
-      }
-    });
+   dialogRef.afterClosed()
+  .pipe(
+    filter(result => result === true)
+  )
+  .subscribe(() => {
+    this.habitService.deleteHabit(habitToDelete.id);
+    this.habits = this.habitService.updateHabitStatuses(this.habitService.getHabits());
+    this.groupedHabits = this.habitService.groupHabits(this.habits);
+    this.currentPageIndex = 0;
+    this.paginator?.firstPage();
+    this.updatePagedHabits();
+  });
   }
 
   onCancelEdit(): void {

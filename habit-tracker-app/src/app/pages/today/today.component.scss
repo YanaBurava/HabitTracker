@@ -1,8 +1,8 @@
 .habit-card {
   border: 2px solid;
   border-radius: 12px;
-  padding: 12px 26px;
-  margin-bottom: 14px;
+  padding: 8px 26px;
+  margin-bottom: 8px;
   transform-origin: top left;
   font-family: 'Arial', sans-serif;
   display: flex;
@@ -14,7 +14,7 @@
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); 
     transform: translateY(-1px);
    }
-      transform: scale(0.9); 
+      transform: scale(0.98); 
 }
 .habit-info {
   display: flex;

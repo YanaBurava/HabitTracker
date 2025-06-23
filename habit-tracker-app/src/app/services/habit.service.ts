@@ -50,12 +50,15 @@ export class HabitService {
   getIconForGroup(group: string): string {
     const iconMap: Record<string, string> = {
       General: 'home',
-      Fitness: 'fitness_center',
+      Health: 'fitness_center',
       Reading: 'menu_book',
       Relax: 'spa',
       Food: 'restaurant',
-      Study: 'school',
       Sleep: 'bedtime',
+      Learning: 'menu_book',
+      Social: 'group',
+      Productivity: 'work',
+      Mindfulness: 'self_improvement' 
     };
     return iconMap[group] || 'category';
   }
@@ -73,12 +76,12 @@ export class HabitService {
   }
 
   deleteHabit(habitId: number) {
-    const updatedHabits = this.getHabits().filter(h => h.id !== habitId);
+    const updatedHabits = this.getHabits().filter(habit => habit.id !== habitId);
     this.setHabits(updatedHabits);
   }
 
  getHabitById(id: number): Habit | null {
-  const habit = this.getHabits().find(h => h.id === id);
+  const habit = this.getHabits().find(habit => habit.id === id);
   return habit || null;
 }
 }

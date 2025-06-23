@@ -39,38 +39,55 @@ export class RadarChartComponent implements OnChanges {
     }
   }
 
-  getGroupProgress(habits: Habit[]): { group: string, percent: number }[] {
-    const groupMap: Record<string, { total: number, done: number }> = {};
+ getGroupProgress(habits: Habit[]): { group: string; percent: number; total: number; }[] {
+  const groupMap: Record<string, { total: number; done: number }> = {};
 
-    habits.forEach(habit => {
-      if (!groupMap[habit.group]) {
-        groupMap[habit.group] = { total: 0, done: 0 };
+  habits.forEach(habit => {
+    if (!groupMap[habit.group]) {
+      groupMap[habit.group] = { total: 0, done: 0 };
+    }
+    groupMap[habit.group].total += habit.goal;
+    groupMap[habit.group].done += habit.progress.length;
+  });
+
+  return Object.entries(groupMap).map(([group, { total, done }]) => ({
+    group,
+    percent: Math.min(100, Math.round((done / total) * 100)),
+    total
+  }));
+}
+
+getGroupGoalRatios(progress: { group: string, percent: number, total: number }[]): number[] {
+  const max = Math.max(...progress.map(p => p.total));
+  return progress.map(p => Math.round((p.total / max) * 100));
+}
+
+ prepareRadarChart(): void {
+  const groupProgress = this.getGroupProgress(this.habits);
+  const goalRatios = this.getGroupGoalRatios(groupProgress);
+  this.radarChartLabels = groupProgress.map(g => g.group);
+
+  this.radarChartData = {
+    labels: this.radarChartLabels,
+    datasets: [
+      {
+        label: 'Progress',
+        data: groupProgress.map(g => g.percent),
+        fill: true,
+        backgroundColor: 'rgba(34, 202, 236, 0.2)',
+        borderColor: 'rgb(102, 123, 180)',
+        pointBackgroundColor: 'rgb(132, 145, 185)',
+      },
+      {
+        label: 'Group Goal Weight',
+        data: goalRatios,
+        fill: false,
+        borderColor: 'rgba(137, 197, 160, 0.7)',
+        borderDash: [5, 5],
+        pointRadius: 0
       }
-      groupMap[habit.group].total += habit.goal;
-      groupMap[habit.group].done += habit.progress.length;
-    });
+    ]
+  };
+}
 
-    return Object.entries(groupMap).map(([group, { total, done }]) => ({
-      group,
-      percent: Math.min(100, Math.round((done / total) * 100))
-    }));
-  }
-
-  prepareRadarChart(): void {
-    const groupProgress = this.getGroupProgress(this.habits);
-    this.radarChartLabels = groupProgress.map(g => g.group);
-    this.radarChartData = {
-      labels: this.radarChartLabels,
-      datasets: [
-        {
-          label: 'Group Progress',
-          data: groupProgress.map(g => g.percent),
-          fill: true,
-          backgroundColor: 'rgba(34, 202, 236, .2)',
-          borderColor: 'rgba(34, 202, 236, 1)',
-          pointBackgroundColor: 'rgba(34, 202, 236, 1)',
-        }
-      ]
-    };
-  }
 }
