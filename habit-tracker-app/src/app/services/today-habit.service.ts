@@ -8,9 +8,10 @@ import { format } from 'date-fns';
   providedIn: 'root'
 })
 export class HabitsService {
-  private STORAGE_KEY = 'habitProgress';
-   private HABITS_KEY = 'habitsList';
-   constructor(private habitService: HabitService) {}
+private readonly STORAGE_KEY = 'habitProgress';
+private readonly HABITS_KEY = 'habitsList';
+
+constructor(private habitService: HabitService) {}
 
   loadHabits(): Habit[] {
     const raw = localStorage.getItem(this.HABITS_KEY);

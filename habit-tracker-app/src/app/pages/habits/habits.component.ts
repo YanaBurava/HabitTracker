@@ -26,21 +26,23 @@ export class HabitsComponent implements OnInit, OnDestroy {
   pageSize = 10;
   currentPageIndex = 0;
 
-  private subscription!: Subscription;
+private subscription: Subscription = new Subscription();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 constructor(private habitService: HabitService, private dialog: MatDialog, private router: Router) {}
   ngOnInit() {
-    this.subscription = this.habitService.habits$.subscribe(habits => {
+ this.subscription.add(
+    this.habitService.habits$.subscribe(habits => {
       this.habits = habits;
       this.groupedHabits = this.habitService.groupHabits(habits);
       this.updatePagedHabits();
-    });
+    })
+  );
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   onSelectGroup(group: string) {
