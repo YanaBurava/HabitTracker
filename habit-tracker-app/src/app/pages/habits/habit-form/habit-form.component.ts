@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, signal, effect } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject, filter, takeUntil } from 'rxjs';
 import { Habit } from '../../../models/habit.model';
@@ -19,15 +19,18 @@ export class HabitFormComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
 
   private _habit: Habit | null = null;
-  private editableHabit$ = new BehaviorSubject<Habit>(this.getEmptyHabit());
+  editableHabit = signal<Habit>(this.getEmptyHabit());
   @Input() habitGroups: string[] = [];
 
   @Input()
+   get habit(): Habit | null {
+    return this._habit;
+  }
   set habit(value: Habit | null) {
     this._habit = value;
     const habitToEdit = value ? { ...value } : this.getEmptyHabit();
-    this.editableHabit$.next(habitToEdit);
-    this.form.patchValue(habitToEdit);
+    this.editableHabit.set(habitToEdit);
+     this.form.patchValue(habitToEdit);
   }
 
   @Output() save = new EventEmitter<Habit>();
@@ -48,29 +51,18 @@ export class HabitFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  get habit(): Habit | null {
-    return this._habit;
-  }
-
   ngOnInit(): void {
 
-      if (!this._habit) {
-    const savedHabit = localStorage.getItem('lastEditedHabit');
-    if (savedHabit) {
-      try {
-        const parsedHabit: Habit = JSON.parse(savedHabit);
-        this.habit = parsedHabit;
-      } catch (e) {
-        console.warn('Invalid habit in localStorage');
+    if (!this._habit) {
+      const savedHabit = localStorage.getItem('lastEditedHabit');
+      if (savedHabit) {
+        try {
+          this.habit = JSON.parse(savedHabit);
+        } catch {
+          console.warn('Invalid habit in localStorage');
+        }
       }
     }
-  }
-  
-    this.editableHabit$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(habit => {
-        this.form.patchValue(habit);
-      });
   }
 
   onSubmit(): void {
