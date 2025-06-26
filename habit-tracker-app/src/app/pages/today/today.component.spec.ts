@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { TodayComponent } from './today.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('TodayComponent', () => {
   let component: TodayComponent;
   let fixture: ComponentFixture<TodayComponent>;
 
-  beforeEach(waitForAsync(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TodayComponent]
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TodayComponent],
+      imports: [MatIconModule]
     }).compileComponents();
   }));
 
