@@ -7,7 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogData } from './confirm-dialog/confirm-dialog-data.interface';
 import { ConfirmDialogLabel } from './confirm-dialog/confirm-dialog-label.enum';
-
+import { Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-habits',
@@ -22,21 +23,22 @@ export class HabitsComponent implements OnInit, OnDestroy {
   pagedHabits: Habit[] = [];
   editingHabit: Habit | null = null;
   readonly pageSizeOptions = [5, 10, 25];
-  pageSize = 5;
+  pageSize = 10;
   currentPageIndex = 0;
 
-  private subscription!: Subscription;
+private subscription: Subscription = new Subscription();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private habitService: HabitService, private dialog: MatDialog) {}
-
+constructor(private habitService: HabitService, private dialog: MatDialog, private router: Router) {}
   ngOnInit() {
-    this.subscription = this.habitService.habits$.subscribe(habits => {
+ this.subscription.add(
+    this.habitService.habits$.subscribe(habits => {
       this.habits = habits;
       this.groupedHabits = this.habitService.groupHabits(habits);
       this.updatePagedHabits();
-    });
+    })
+  );
   }
 
   ngOnDestroy() {
@@ -113,16 +115,18 @@ export class HabitsComponent implements OnInit, OnDestroy {
       } as ConfirmDialogData
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.habitService.deleteHabit(habitToDelete.id);
-        this.habits = this.habitService.updateHabitStatuses(this.habitService.getHabits());
-        this.groupedHabits = this.habitService.groupHabits(this.habits);
-        this.currentPageIndex = 0;
-        this.paginator?.firstPage();
-        this.updatePagedHabits();
-      }
-    });
+   dialogRef.afterClosed()
+  .pipe(
+    filter(result => result === true)
+  )
+  .subscribe(() => {
+    this.habitService.deleteHabit(habitToDelete.id);
+    this.habits = this.habitService.updateHabitStatuses(this.habitService.getHabits());
+    this.groupedHabits = this.habitService.groupHabits(this.habits);
+    this.currentPageIndex = 0;
+    this.paginator?.firstPage();
+    this.updatePagedHabits();
+  });
   }
 
   onCancelEdit(): void {
@@ -147,4 +151,5 @@ export class HabitsComponent implements OnInit, OnDestroy {
     this.currentPageIndex = 0;
     this.updatePagedHabits();
   }
+
 }

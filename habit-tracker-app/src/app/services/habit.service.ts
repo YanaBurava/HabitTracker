@@ -73,7 +73,7 @@ export class HabitService {
   }
 
   deleteHabit(habitId: number) {
-    const updatedHabits = this.getHabits().filter(h => h.id !== habitId);
+    const updatedHabits = this.getHabits().filter(habit => habit.id !== habitId);
     this.setHabits(updatedHabits);
   }
 }

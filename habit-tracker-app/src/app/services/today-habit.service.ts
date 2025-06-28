@@ -7,7 +7,7 @@ import { format } from 'date-fns';
   providedIn: 'root'
 })
 export class HabitService {
-  private STORAGE_KEY = 'habitProgress';
+  private readonly STORAGE_KEY = 'habitProgress';
 
   loadStoredProgress(): Record<string, string[]> {
     const raw = localStorage.getItem(this.STORAGE_KEY);

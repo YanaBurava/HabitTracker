@@ -92,6 +92,11 @@ export class HabitFormComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.cancel.emit());
   }
+  shouldShowError(controlName: string): boolean {
+    const control = this.form.get(controlName);
+    return !!(control && control.invalid && control.touched);
+  }
+
 
   private getEmptyHabit(): Habit {
     return {

@@ -64,6 +64,6 @@ hasReachedGoal(habit: Habit): boolean {
 }
 getCurrentDayIndex(): number {
   const todayISO = this.todayDateStr;
-  return this.daysISO.findIndex(d => d === todayISO);
+  return this.daysISO.findIndex(day => day === todayISO);
 }
 }

@@ -6,8 +6,8 @@ describe('TodayComponent', () => {
   let component: TodayComponent;
   let fixture: ComponentFixture<TodayComponent>;
 
-  beforeEach(waitForAsync(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [TodayComponent]
     }).compileComponents();
   }));
