@@ -6,7 +6,8 @@ import { HabitFormComponent } from './habit-form/habit-form.component';
 const routes: Routes = [
   { path: '', component: HabitsComponent },
   { path: 'new', component: HabitFormComponent },
-  { path: 'edit/:id', component: HabitFormComponent }
+  { path: 'edit/:id', component: HabitFormComponent },
+
 ];
 
 @NgModule({

@@ -4,8 +4,6 @@ export enum AppRoutes {
   HABITS = '/habits',
   FOCUS = '/focus',
   STATISTICS = '/statistics',
-  ARCHIVE = '/archive',
   ACHIEVEMENTS = '/achievements',
-  SETTINGS = '/settings',
   DICTIONARY = '/dictionary',
 }

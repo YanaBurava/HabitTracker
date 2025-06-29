@@ -1,13 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Habit } from '../models/habit.model';
+import { HabitService } from './habit.service'; 
 import { MOCK_HABIT } from '../mock/mock-habit';
 import { format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HabitService {
-  private readonly STORAGE_KEY = 'habitProgress';
+export class HabitsService {
+private readonly STORAGE_KEY = 'habitProgress';
+private readonly HABITS_KEY = 'habitsList';
+
+constructor(private habitService: HabitService) {}
+
+  loadHabits(): Habit[] {
+    const raw = localStorage.getItem(this.HABITS_KEY);
+    if (raw) {
+      return JSON.parse(raw).map((h: any) => ({
+        ...h,
+        startDate: new Date(h.startDate),
+        endDate: h.endDate ? new Date(h.endDate) : null,
+      }));
+    }
+    return [...MOCK_HABIT];
+  }
+  saveHabits(habits: Habit[]): void {
+    localStorage.setItem(this.HABITS_KEY, JSON.stringify(habits));
+  }
+
+  addHabit(newHabit: Habit): void {
+    const habits = this.loadHabits();
+    habits.push(newHabit);
+    this.saveHabits(habits);
+  }
+
+  updateHabit(updatedHabit: Habit): void {
+    const habits = this.loadHabits().map(h => h.id === updatedHabit.id ? updatedHabit : h);
+    this.saveHabits(habits);
+  }
 
   loadStoredProgress(): Record<string, string[]> {
     const raw = localStorage.getItem(this.STORAGE_KEY);
@@ -19,15 +49,14 @@ export class HabitService {
     return format(new Date(date), 'yyyy-MM-dd');
   }
   mapHabitsWithProgress(storedProgress: Record<string, string[]>): Habit[] {
-    return MOCK_HABIT.map(habit => {
+    const habits = this.loadHabits();
+    return habits.map(habit => {
       const habitId = habit.id.toString();
       const progressFromStorage = storedProgress[habitId] || habit.progress;
 
       return {
         ...habit,
         progress: progressFromStorage.map(d => this.formatDate(d)),
-        startDate: new Date(habit.startDate),
-        endDate: habit.endDate ? new Date(habit.endDate) : null,
       };
     });
   }
@@ -55,8 +84,11 @@ updateHabitStatuses(habits: Habit[]): Habit[] {
   }
 
   getActiveHabits(): Habit[] {
-    return this.getHabits().filter(habit => habit.isActive && !habit.isExpired);
-  }
+ const now = new Date();
+    return this.habitService.getHabits().filter(habit =>
+      habit.startDate <= now && (!habit.endDate || habit.endDate >= now)
+    );
+    }
 
     isMarkedDay(habit: Habit, dateStr: string): boolean {
     const progress = this.getProgressForHabit(habit);
@@ -102,7 +134,10 @@ updateHabitStatuses(habits: Habit[]): Habit[] {
   const doneCount = habit.progress.length;
   return `${doneCount}/${habit.goal}`;
 }
-
+ getHabitById(id: number): Habit | null {
+  const habit = this.getHabits().find(habit => habit.id === id);
+  return habit || null;
+}
 filterHabitsByWeek(habits: Habit[], weekStart: Date, weekEnd: Date): Habit[] {
     const MAX_DATE = new Date('9999-12-31T23:59:59.999Z');
     return habits.filter(habit => {
@@ -111,5 +146,6 @@ filterHabitsByWeek(habits: Habit[], weekStart: Date, weekEnd: Date): Habit[] {
 
     return startDate <= weekEnd && endDate >= weekStart;
   });
+
 }
 }

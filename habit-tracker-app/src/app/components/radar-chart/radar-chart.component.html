@@ -1,0 +1,11 @@
+<div *ngIf="radarChartData">
+  <p class="chart-description">
+    The chart shows how successfully you are completing your habits in each group.
+    The higher the value, the closer you are to reaching your goal.
+  </p>
+  <canvas baseChart
+          [data]="radarChartData"
+          [options]="radarChartOptions"
+          [type]="'radar'">
+  </canvas>
+</div>

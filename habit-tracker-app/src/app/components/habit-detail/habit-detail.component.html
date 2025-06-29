@@ -1,2 +1,28 @@
-<h2>Habit Detail</h2>
-<p>Details for habit ID: {{ habitId }}</p>
+<div class="habit-details">
+@if (habit?.name) {
+  <h2>{{ habit?.name }}</h2>
+  <p><strong>Group:</strong> {{ habit?.group}}</p>
+  <p><strong>Goal:</strong> {{ habit?.goal}}</p>
+
+  <div class="calendar-header">
+    <button (click)="previousMonth()">&#8592;</button>
+    <h2>{{ getMonthLabel() }}</h2>
+    <button (click)="nextMonth()">&#8594;</button>
+  </div>
+
+  <div class="calendar-grid">
+    <div
+      *ngFor="let day of daysInMonth"
+      [class.marked]="isMarked(day)"
+      [class.empty]="!isMarked(day)"
+      [matTooltip]="day | date: 'fullDate'"
+      [style.backgroundColor]="isMarked(day) ? habit?.color : '#ccc'"
+    >
+      {{ day | date: 'd' }}
+    </div>
+  </div>
+
+} @else {
+  <p>Habit not found.</p>
+}
+</div>

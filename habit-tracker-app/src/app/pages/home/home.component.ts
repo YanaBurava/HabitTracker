@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { startOfWeek, endOfWeek, addWeeks, subWeeks, format } from 'date-fns';
-import { HabitService } from '../../services/today-habit.service';
+import { HabitsService } from '../../services/today-habit.service';
 import { Habit } from '../../models/habit.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { Habit } from '../../models/habit.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  today: Date = new Date(); 
   currentDate!: string;
   weather: any;
   wordOfTheDay: any;
@@ -19,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   habits: Habit[] = [];
 
-  constructor(private habitService: HabitService) {}
+  constructor(private habitService: HabitsService, private router: Router) {}
 
 ngOnInit() {
   const today = new Date();
@@ -83,4 +85,8 @@ ngOnInit() {
     const count = habit.progress.length;
     return Math.min(100, Math.round((count / habit.goal) * 100));
   }
+
+   goToHabitDetail(habit: Habit) {
+  this.router.navigate(['/habit', habit.id]);
+   }
 }

@@ -25,6 +25,8 @@ export class HabitsComponent implements OnInit, OnDestroy {
   readonly pageSizeOptions = [5, 10, 25];
   pageSize = 10;
   currentPageIndex = 0;
+showGroups: boolean = false;
+isMobile: boolean = false;
 
 private subscription: Subscription = new Subscription();
 
@@ -152,4 +154,7 @@ constructor(private habitService: HabitService, private dialog: MatDialog, priva
     this.updatePagedHabits();
   }
 
+  toggleGroups(): void {
+  this.showGroups = !this.showGroups;
+}
 }

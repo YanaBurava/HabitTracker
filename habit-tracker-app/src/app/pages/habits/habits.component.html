@@ -33,22 +33,28 @@
   </button>
   </div>
 </div>
-<div class="habit-list" *ngIf="!editingHabit">
-<div *ngFor="let habit of pagedHabits">
-  <app-habit-card
-    [habit]="habit"
-    (edit)="onEditHabit(habit)"
-    (delete)="handleDelete(habit)"
-    [class.active-habit]="habit.isActive">
-  </app-habit-card>
-</div>
+<!-- (1) корневой контейнер для списка и пагинации -->
+<div class="habits-container" *ngIf="!editingHabit">
 
-  <mat-paginator
-    [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup].length || 0)"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="onPageChange($event)">
-  </mat-paginator>
+  <!-- (2) сами карточки -->
+ <div class="habit-list">
+    <app-habit-card
+      *ngFor="let habit of pagedHabits"
+      [habit]="habit"
+      (edit)="onEditHabit(habit)"
+      (delete)="handleDelete(habit)"
+      [class.active-habit]="habit.isActive">
+    </app-habit-card>
+  </div>
+  <!-- (3) пагинация — обёртка, чтобы «прижать» слева -->
+  <div class="paginator-wrapper">
+    <mat-paginator
+      [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup].length || 0)"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
 </div>
 
 <app-habit-form
