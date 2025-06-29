@@ -3,7 +3,7 @@ export enum HabitFormLabels {
   Description = 'Description',
   Icon = 'Icon',
   Colour = 'Colour',
-  DaysPerWeek = 'Days per week',
+  Goals = 'Goals',
   Group = 'Group',
   DateStart = 'Date Start',
   DateEnd = 'Date End',

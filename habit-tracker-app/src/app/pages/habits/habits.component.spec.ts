@@ -6,8 +6,8 @@ describe('HabitsComponent', () => {
   let component: HabitsComponent;
   let fixture: ComponentFixture<HabitsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       declarations: [HabitsComponent]
     })
     .compileComponents();

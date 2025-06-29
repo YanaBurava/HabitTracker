@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Habit } from '../models/habit.model';
 import { MOCK_HABIT } from '../mock/mock-habit';
 
@@ -6,12 +8,21 @@ import { MOCK_HABIT } from '../mock/mock-habit';
   providedIn: 'root'
 })
 export class HabitService {
-  getHabits(): Habit[] {
-    return MOCK_HABIT.map(habit => ({
+  private habitsSubject = new BehaviorSubject<Habit[]>([]);
+  habits$: Observable<Habit[]> = this.habitsSubject.asObservable();
+
+  constructor() {
+    const parsedHabits = MOCK_HABIT.map(habit => ({
       ...habit,
       startDate: new Date(habit.startDate),
       endDate: habit.endDate ? new Date(habit.endDate) : null,
     }));
+    this.setHabits(parsedHabits);
+  }
+
+  private setHabits(habits: Habit[]): void {
+    const updated = this.updateHabitStatuses(habits);
+    this.habitsSubject.next(updated);
   }
 
   updateHabitStatuses(habits: Habit[]): Habit[] {
@@ -23,12 +34,14 @@ export class HabitService {
     }));
   }
 
+  getHabits(): Habit[] {
+    return this.habitsSubject.getValue();
+  }
+
   groupHabits(habits: Habit[]): { [group: string]: Habit[] } {
     return habits.reduce((acc, habit) => {
       const group = habit.group || 'Other';
-      if (!acc[group]) {
-        acc[group] = [];
-      }
+      if (!acc[group]) acc[group] = [];
       acc[group].push(habit);
       return acc;
     }, {} as { [group: string]: Habit[] });
@@ -45,5 +58,22 @@ export class HabitService {
       Sleep: 'bedtime',
     };
     return iconMap[group] || 'category';
+  }
+
+  addHabit(habit: Habit) {
+    const updatedHabits = [...this.getHabits(), habit];
+    this.setHabits(updatedHabits);
+  }
+
+  updateHabit(updatedHabit: Habit) {
+    const updatedHabits = this.getHabits().map(habit =>
+      habit.id === updatedHabit.id ? updatedHabit : habit
+    );
+    this.setHabits(updatedHabits);
+  }
+
+  deleteHabit(habitId: number) {
+    const updatedHabits = this.getHabits().filter(habit => habit.id !== habitId);
+    this.setHabits(updatedHabits);
   }
 }

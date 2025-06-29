@@ -1,38 +1,47 @@
+<div *ngIf="!editingHabit">
 <div class="top-bar">
   <div class="group-filter groups-wrapper">
-    <button
-      mat-button
-      [color]="selectedGroup === 'All' ? 'primary' : ''"
-      (click)="onSelectGroup('All')"
-      class="group-btn">
+    <button mat-button
+            [color]="selectedGroup === 'All' ? 'primary' : ''"
+            (click)="onSelectGroup('All')"
+            class="group-btn">
       <mat-icon>list</mat-icon>
       <span>All</span>
     </button>
 
-    <button
-      *ngFor="let group of habitGroups"
-      mat-button
-      [color]="isGroupSelected(group)"
-      (click)="onSelectGroup(group)"
-      class="group-btn">
-      <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
-      <span>{{ group }}</span>
-    </button>
+<button *ngFor="let group of habitGroups"
+        mat-button
+        [color]="isGroupSelected(group)"
+        (click)="onSelectGroup(group)"
+        class="group-btn"
+        [matTooltip]="group" matTooltipPosition="above" matTooltipShowDelay="300">
+  <div class="group-icon">
+    <mat-icon>{{ getIconForGroup(group) }}</mat-icon>
   </div>
+</button>
+  </div>
+  </div>
+
+  <div class="filters-search">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search habits</mat-label>
+    <input matInput placeholder="Enter habit name" [(ngModel)]="searchTerm" (input)="onSearchChange()" />
+  </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="onAddHabit()" class="add-button">
     Add Habit
   </button>
+  </div>
 </div>
-
 <div class="habit-list" *ngIf="!editingHabit">
+<div *ngFor="let habit of pagedHabits">
   <app-habit-card
-    *ngFor="let habit of pagedHabits"
     [habit]="habit"
     (edit)="onEditHabit(habit)"
     (delete)="handleDelete(habit)"
     [class.active-habit]="habit.isActive">
   </app-habit-card>
+</div>
 
   <mat-paginator
     [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup].length || 0)"
@@ -49,3 +58,4 @@
   (save)="onSaveHabit($event)"
   (cancel)="onCancelEdit()">
 </app-habit-form>
+

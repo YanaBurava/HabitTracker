@@ -15,7 +15,49 @@
     <p>{{ wordOfTheDay?.definition }}</p>
   </div>
 
-  <div class="active-habits">
-    <h2>Active Habits for the Week</h2>
+ <div class="home">
+  <h1>My Habits Tracker</h1>
+
+  <div class="week-navigation">
+    <button (click)="previousWeek()">←</button>
+    <span>{{ currentWeekStart | date: 'MMM d' }} – {{ currentWeekEnd | date: 'MMM d' }}</span>
+    <button (click)="nextWeek()">→</button>
+  </div>
+
+  <div class="habit-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Habit</th>
+          <th *ngFor="let date of weekDates">{{ date | date: 'EEE d' }}</th>
+          <th>Progress</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let habit of habits">
+          <td>{{ habit.name }}</td>
+          <td
+            *ngFor="let date of weekDates"
+            [ngStyle]="{
+              backgroundColor: isMarked(habit, date) ? habit.color : '#f0f0f0'
+            }"
+            (click)="toggleMark(habit, date)"
+            class="clickable"
+          >
+            <input
+              type="checkbox"
+              [checked]="isMarked(habit, date)"
+              (click)="$event.stopPropagation(); toggleMark(habit, date)"
+            />
+          </td>
+          <td>
+            <div class="progress-container">
+              <div class="progress-bar" [style.width.%]="getProgress(habit)"></div>
+              <span>{{ getProgress(habit) }}%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

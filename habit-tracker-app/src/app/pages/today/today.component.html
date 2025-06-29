@@ -1,1 +1,34 @@
-<p>today works!</p>
+<h2>Today — {{ todayDateStr }}</h2>
+
+<div *ngFor="let habit of habits" class="habit-card" [style.borderColor]="habit.color">
+
+<div class="habit-info">
+  <button class="mark-today-btn"
+          [ngClass]="{'marked': isMarkedToday(habit)}"
+          [style.backgroundColor]="isMarkedToday(habit) ? habit.color : '#ccc'"
+          (click)="toggleMarkToday(habit)">
+    <mat-icon *ngIf="isMarkedToday(habit)">check</mat-icon>
+  </button>
+
+  <mat-icon class="habit-icon">{{ habit.icon }}</mat-icon>
+  <span class="habit-name">{{ habit.name }}</span>
+
+  <div class="habit-progress" [class.goal-reached]="hasReachedGoal(habit)">
+    {{ getProgressText(habit) }}
+    <mat-icon *ngIf="hasReachedGoal(habit)" class="goal-icon">emoji_events</mat-icon>
+  </div>
+</div>
+
+  <p class="habit-description">{{ habit.description }}</p>
+
+  <div class="days-row">
+   <div *ngFor="let day of daysOfWeek; let i = index"
+     class="day-box"
+     [class.marked]="isMarked(habit, i)"
+     [style.backgroundColor]="isMarked(habit, i) ? habit.color : 'transparent'"
+     [style.color]="isMarked(habit, i) ? '#fff' : '#999'"
+     (click)="toggleMark(habit, i)">
+  {{ day }}
+</div>
+  </div>
+</div>

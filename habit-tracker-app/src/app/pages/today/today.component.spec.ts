@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TodayComponent } from './today.component';
 
@@ -6,12 +6,13 @@ describe('TodayComponent', () => {
   let component: TodayComponent;
   let fixture: ComponentFixture<TodayComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       declarations: [TodayComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(TodayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
