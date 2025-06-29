@@ -63,7 +63,7 @@ app-weather {
 }
 
 .habit-table thead tr th {
-      background: linear-gradient(135deg, #95aaee, #ae8ada);
+      background: linear-gradient(135deg, #95aaee5b, #ae8ada5b);
         box-shadow: 0 0 12px rgba(144, 0, 255, 0.6);
 
   color: #fff;
@@ -118,7 +118,7 @@ app-weather {
 }
 
 .progress-bar {
-    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    background: linear-gradient(135deg, #00c8ffad, #92fe9da6);
     color: white;
     box-shadow: 0 0 6px rgba(0, 255, 200, 0.6);
   height: 100%;
@@ -136,7 +136,6 @@ app-weather {
   color: #49742f;
 }
 
-/* Mobile styles */
 @media (max-width: 1024px) {
   .habit-table {
     max-width: 100%;

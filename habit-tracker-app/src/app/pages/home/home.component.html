@@ -32,7 +32,7 @@
         <td
           *ngFor="let date of weekDates"
           [ngStyle]="{
-            backgroundColor: isMarked(habit, date) ? habit.color + '80' : 'rgba(255, 255, 255, 0.4)',
+            backgroundColor: isMarked(habit, date) ? habit.color + '33' : 'rgba(255, 255, 255, 0.4)',
             boxShadow: isMarked(habit, date)
               ? '0 4px 8px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.4)'
               : '0 2px 4px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.3)'
