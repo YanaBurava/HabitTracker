@@ -1,25 +1,28 @@
 .habit-card {
-  border: 2px solid;
-  border-radius: 12px;
-  padding: 8px 26px;
-  margin-bottom: 8px;
-  transform-origin: top left;
+  border-radius: 16px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
   font-family: 'Arial', sans-serif;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(12, 2, 16, 0.26);
+  background: linear-gradient(145deg, rgba(37, 37, 58, 0.7), rgba(42, 42, 63, 0.5));
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transform: scale(0.98);
 
-   &:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); 
-    transform: translateY(-1px);
-   }
-      transform: scale(0.98); 
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    transform: translateY(-2px);
+  }
 }
+
 .habit-info {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .habit-header {
@@ -30,92 +33,100 @@
 }
 
 .mark-today-btn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.25s ease;
-  color: white;
-  font-size: 20px;
+  font-size: 22px;
   padding: 0;
   margin-right: 8px;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  box-shadow: 0 0 12px rgba(144, 0, 255, 0.6);
+  transition: all 0.3s ease;
 
   &.marked {
-    color: white;
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    box-shadow: 0 0 16px rgba(0, 255, 163, 0.7);
   }
 
   &:hover {
-    filter: brightness(85%);
+    filter: brightness(1.1);
+    transform: scale(1.05);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.5);
   }
 }
 
 .habit-icon {
   font-size: 28px;
-  color: #555;
+  color: #ddd;
 }
 
 .habit-name {
   font-weight: 600;
   font-size: 18px;
   flex-grow: 1;
-      cursor: pointer;
-
+  color: #fff;
+  cursor: pointer;
 }
 
 .habit-description {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 10px;
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 12px;
 }
 
 .days-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .day-box {
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   user-select: none;
   font-weight: 600;
   font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.05);
   color: #999;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 
   &.marked {
-    font-weight: 700;
-  }
-  .day-box {
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
-  border-radius: 4px;
-  cursor: pointer;
-  user-select: none;
-  font-weight: 600;
-  font-size: 14px;
-  color: #999;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-  &.marked {
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
     color: white;
+    box-shadow: 0 0 6px rgba(0, 255, 200, 0.6);
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
   }
 }
 
+.habit-progress {
+  font-size: 13px;
+  color: #bbb;
+  display: flex;
+  align-items: center;
 
+  &.goal-reached {
+    color: #ffe600;
+    font-weight: bold;
 
+    .goal-icon {
+      margin-left: 4px;
+      color: #ffe600;
+    }
+  }
 }

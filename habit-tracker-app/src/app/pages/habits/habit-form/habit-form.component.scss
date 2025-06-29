@@ -1,61 +1,79 @@
 :host {
   display: block;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 16px;
-  background-color: #fafafa;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-family: 'Inter', sans-serif;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 mat-form-field {
   width: 100%;
+
+  .mat-form-field-outline {
+    border-radius: 12px;
+  }
+
+  .mat-input-element {
+    font-size: 16px;
+  }
 }
 
-mat-slide-toggle {
-  margin-top: 8px;
+.color-field input {
+  height: 40px;
+  padding: 4px;
 }
 
-button {
-  align-self: flex-end;
-  margin-left: 8px;
+.icon-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+
+  mat-icon {
+    font-size: 22px;
+    color: #7b7b7b;
+  }
 }
 
 .buttons {
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
   margin-top: 24px;
 }
 
-button.save {
-  background-color: #4caf50;
-  color: white;
+button {
+  min-width: 100px;
+  padding: 10px 16px;
+  font-weight: 500;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease;
+}
+
+button[color="primary"] {
+  background-color: #a3d5ff;
+  color: #004e7c;
+
   &:hover {
-    background-color: #45a049;
+    background-color: #91cfff;
   }
 }
 
-button.cancel {
-  background-color: #f44336;
-  color: white;
-  &:hover {
-    background-color: #d32f2f;
-  }
-}
-.icon-option {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 16px;
+button[color="warn"] {
+  background-color: #ffc5c5;
+  color: #7c0000;
 
-  mat-icon {
-    font-size: 24px;
-    color: #666;
+  &:hover {
+    background-color: #ffb3b3;
   }
 }

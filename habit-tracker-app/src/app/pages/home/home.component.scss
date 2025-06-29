@@ -19,16 +19,6 @@
   flex-wrap: wrap;
 }
 
-.header-left {
-  flex-shrink: 0;
-  margin: 0 1rem;
-  max-width: 200px;
-}
-.header-left h1{
- margin: 0;
-  font-size: 1.6rem;
-  line-height: 1.2;
-}
 mat-calendar {
   flex-shrink: 0;
   margin: 0 1rem;
@@ -36,61 +26,13 @@ mat-calendar {
   max-width: 70%;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  background: #ffffffcc; 
+  background: #ffffffcc;
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 app-weather {
   flex-shrink: 0;
   margin: 0 1rem;
-
-  
-  .weather-card {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #eeeeee;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .weather-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  }
-
-  .weather-temp {
-    font-size: 3rem;
-    font-weight: 600;
-    color: #ddd; 
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-
-  .weather-top img {
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-    width: 60px;
-    height: 60px;
-  }
-
-  .weather-info p {
-    color: #ccc;
-    font-weight: 500;
-  }
-
-  .weather-info strong {
-    color: #eee;
-  }
-}
-
-
-.home {
-  padding: 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgba(250, 250, 250, 0.9);
-  color: rgba(51, 51, 51, 0.9);
 }
 
 .week-navigation {
@@ -101,7 +43,7 @@ app-weather {
   padding: 0.5rem 1rem;
   border-radius: 12px;
   background: white;
- font-size: 1.1rem;
+  font-size: 1.1rem;
   font-weight: 700;
   font-family: 'Nunito', sans-serif;
   color: #918585;
@@ -110,119 +52,134 @@ app-weather {
 .habit-table {
   margin: 0.5rem auto;
   padding: 0.7rem;
+  max-width: 900px;
 }
 
 .habit-table table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 6px;
-  font-size: 0.85rem;
-  background-color: transparent; 
+  border-spacing: 0 12px;
+  font-size: 0.95rem;
 }
 
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 6px; 
-  font-size: 0.85rem;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 10px;
-  overflow: hidden;
+.habit-table thead tr th {
+      background: linear-gradient(135deg, #95aaee, #ae8ada);
+        box-shadow: 0 0 12px rgba(144, 0, 255, 0.6);
+
+  color: #fff;
+  font-weight: 700;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 }
 
-th, td {
-  padding: 0.5rem 0.8rem;
+.habit-table tbody tr {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.habit-table tbody tr:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.habit-table tbody tr td {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(65, 64, 64, 0.12), inset 0 2px 6px rgba(255, 255, 255, 0.3);
+  padding: 0.6rem 1rem;
   text-align: center;
   cursor: pointer;
-  position: relative;
-  transition: background-color 0.25s ease, color 0.25s ease;
-  user-select: none;
-}
-
-th {
-  background: linear-gradient(180deg,
-    rgba(246, 209, 193, 0.85) 0%,   
-    rgba(108, 160, 220, 0.85) 100% 
-  );
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
-}
-
-td {
-  background-color: rgba(255, 255, 255, 0.5); 
-  border-radius: 6px;                         
-  box-shadow: 
-    0 1px 2px rgba(0, 0, 0, 0.08),          
-    inset 0 1px 2px rgba(255, 255, 255, 0.15); 
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  user-select: none;
 }
 
-
-td:hover {
-  background-color:#ece6e7;
-  color: #704A49;
-  box-shadow: 0 0 6px rgba(46, 125, 50, 0.15);
+.habit-table tbody tr td:hover {
+  background-color: #f0f4f8;
+  color: #336699;
+  box-shadow: 0 0 10px rgba(51, 102, 153, 0.25);
 }
 
-input[type="checkbox"] {
-  transform: scale(1.1);
-  cursor: pointer;
-  accent-color: #f0fff0;
-}
-
-.colored-cell {
-  background-color: var(--habit-color, rgba(164, 220, 165, 0.6));
-  color: rgba(27, 94, 32, 0.85);
-  font-weight: 600;
-  border-radius: 6px;
-  box-shadow: 0 0 5px rgba(164, 220, 165, 0.4);
+.habit-table input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #6699cc;
+  pointer-events: auto;
 }
 
 .progress-container {
   background-color: rgba(224, 224, 224, 0.7);
-  border-radius: 10px;
+  border-radius: 14px;
   overflow: hidden;
-  height: 14px; 
-  margin-top: 0.4rem;
+  height: 18px;
+  margin-top: 0.5rem;
   position: relative;
 }
 
 .progress-bar {
-  background-color:#D7E8BC; 
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    color: white;
+    box-shadow: 0 0 6px rgba(0, 255, 200, 0.6);
   height: 100%;
-  transition: width 0.35s ease;
-  border-radius: 10px 0 0 10px; 
+  transition: width 0.4s ease;
+  border-radius: 14px 0 0 14px;
 }
 
 .progress-container span {
   position: absolute;
-  right: 8px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #6F8D6A;
-  user-select: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #49742f;
+}
+
+/* Mobile styles */
+@media (max-width: 1024px) {
+  .habit-table {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .habit-table th,
-  .habit-table td {
-    padding: 0.3rem 0.5rem;
-    font-size: 0.7rem;
+  .habit-table thead {
+    display: none;
   }
 
-  .header-left,
-  mat-calendar {
-    max-width: 100%;
-    flex: 1 1 100%;
+  .habit-table tbody tr {
+    display: block;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
   }
 
-  .header-weather {
+  .habit-table tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    margin: 0.3rem 0;
+  }
+
+  .week-navigation {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .content-block {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  mat-calendar {
+    width: 100%;
+  }
+
+  app-weather {
+    width: 100%;
   }
 }

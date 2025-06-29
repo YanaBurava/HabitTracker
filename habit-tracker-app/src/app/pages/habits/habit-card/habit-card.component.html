@@ -1,14 +1,21 @@
 <mat-card class="habit-card"  [ngClass]="{'active-habit': habit.isActive}">
-  <div class="icon-wrapper" [style.backgroundColor]="habit.color">
-<div class="icon-wrapper" [matTooltip]="'Habit Goal: ' + habit.goal.toString()" matTooltipPosition="above" matTooltipShowDelay="300">
-  <span class="material-symbols-rounded">{{ habit.icon }}</span>
-</div>
+ <div class="icon-wrapper" 
+     [style.backgroundColor]="habit.color"
+     [ngClass]="{'active-habit': habit.isActive}">
+  <div class="icon-wrapper" 
+       [matTooltip]="'Habit Goal: ' + habit.goal.toString()" 
+       matTooltipPosition="above" 
+       matTooltipShowDelay="300"
+       [ngClass]="{'active-habit': habit.isActive}">
+    <span class="material-symbols-rounded">{{ habit.icon }}</span>
   </div>
+</div>
+
 
   <div class="habit-info">
     <h3>{{ habit.name }}</h3>
     <p class="description">
-      {{ habit.description | slice:0:60 }}{{ habit.description }}
+      {{ habit.description | slice:0:60 }}
     </p>
 <div class="dates">
   <span [ngClass]="{'active-date': habit.isActive, 'expired-date': habit.isExpired}">

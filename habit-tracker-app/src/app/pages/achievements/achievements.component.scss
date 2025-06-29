@@ -1,46 +1,61 @@
 .achievements-container {
   padding: 2rem;
   text-align: center;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  margin-top: 32px;
 
   .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
+    color: #333;
   }
 
   .achievements-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
   }
 
   .achievement-card {
-    background: #f4f4f4;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #f8fafd;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
     }
 
     .icon-wrapper {
-      font-size: 3rem;
-      color: goldenrod;
+      font-size: 2.5rem;
+      color: #ffcb6b;
       margin-bottom: 0.5rem;
     }
 
     h3 {
       margin: 0.5rem 0;
       font-size: 1.2rem;
+      font-weight: 600;
+      color: #2d2d2d;
     }
 
     p {
-      margin: 0.2rem 0;
-      color: #555;
+      margin: 0.25rem 0;
+      color: #5f5f5f;
+      font-size: 14px;
     }
+  }
+
+  p {
+    color: #999;
+    font-style: italic;
+    margin-top: 1rem;
   }
 }
