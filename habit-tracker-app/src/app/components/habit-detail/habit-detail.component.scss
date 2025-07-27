@@ -4,24 +4,34 @@
   margin: 0 auto 40px auto;
   font-family: Arial, sans-serif;
 
-  h2 {
-    color: #12142eab;
-    font-weight: 700;
-    font-size: 2rem;
-    margin: 0 0 20px 0;
-  }
+h2 {
+  border-radius: 6px;
+  color: #a8a3a3;
+  display: inline-block;
+}
+
+.habit-name {
+  text-align: center;
+  text-shadow: 2px 2px 4px var(--habit-color, #6c6e6c);
+}
 
   p {
     font-size: 16px;
     margin: 8px 0;
+      color: #12142eab;
+
 
     strong {
-      color: #333;
+      color: #6e6868;
       font-weight: 600;
       margin-right: 6px;
     }
   }
 }
+.habit-details section {
+  margin-top: 40px;
+}
+
 .progress-and-calendar {
   display: flex;
   gap: 20px;
@@ -52,7 +62,7 @@
   max-width: 100%;
   max-height: 100%;
   border: 1px solid #ddd;
-  padding: 12px;
+    padding: 20px 12px 12px 12px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 12px;
@@ -124,6 +134,58 @@
   color: #666;
 }
 
+.year-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;             
+  margin-bottom: 5px;    
+ 
+  button {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #333;
+      padding: 0;
+      line-height: 1;
+      user-select: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #1b183b94;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+}
+
+.year-heatmap {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(53, 12px); 
+  grid-auto-rows: 12px;
+  gap: 4px;
+  justify-content: start;
+
+  div {
+    width: 12px;
+    height: 12px;
+    background-color: #eee;
+    border-radius: 3px;
+    cursor: default;
+    box-shadow: 0 0 2px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  div.marked {
+    background-color: var(--habit-color, #4caf50);
+  }
+}
 // Адаптив
 @media (max-width: 480px) {
   .habit-details {
@@ -154,7 +216,7 @@
   .resizable-calendar-container {
     min-width: 100%;
     min-height: auto;
-    padding: 10px;
+    padding: 20px 12px 12px 12px;
 
     .calendar-header {
       button {
@@ -174,6 +236,16 @@
         font-size: 14px;
         padding: 2px;
       }
+    }
+  }
+
+  .year-heatmap {
+    grid-template-columns: repeat(26, 12px);
+    gap: 2px;
+
+    div {
+      width: 10px;
+      height: 10px;
     }
   }
 }

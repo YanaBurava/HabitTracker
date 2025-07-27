@@ -1,6 +1,8 @@
 <div class="habit-details">
   @if (habit?.name) {
-    <h2>{{ habit?.name }}</h2>
+<h2
+ class="habit-name"
+ [style.--habit-color]="habit?.color">{{ habit?.name }}</h2>
     <p><strong>Group:</strong> {{ habit?.group}}</p>
     <p><strong>Goal:</strong> {{ habit?.goal}}</p>
 
@@ -30,6 +32,25 @@
   </div>
 </div>
 
+  <section>
+<div class="year-navigation">
+  <button (click)="previousYear()">&#8592;</button>
+  <h2>{{ getYearLabel() }}</h2>
+  <button (click)="nextYear()">&#8594;</button>
+</div>
+
+    <div class="year-heatmap">
+      <div
+        *ngFor="let day of daysInYear"
+        class="day-cell"
+        [class.marked]="isMarked(day)"
+                [style.backgroundColor]="isMarked(day) ? habit?.color : '#ccc'"
+        [title]="day | date:'dd MMM yyyy'"
+      >
+        &nbsp;
+      </div>
+    </div>
+  </section>
 
 
   } @else {
