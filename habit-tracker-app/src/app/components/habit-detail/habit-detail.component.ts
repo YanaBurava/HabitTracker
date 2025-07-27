@@ -9,12 +9,13 @@ import {
   addMonths,
   format,
 } from 'date-fns';
+import { CircularProgressComponent } from '../circular-progress/circular-progress.component';
 
 @Component({
   selector: 'app-habit-detail',
   standalone: false,
   templateUrl: './habit-detail.component.html',
-  styleUrl: './habit-detail.component.scss'
+  styleUrl: './habit-detail.component.scss',
 })
 export class HabitDetailComponent implements OnInit {
   habit: Habit | null = null;
@@ -61,4 +62,13 @@ generateMonthDays(): void {
   getMonthLabel(): string {
     return format(this.currentMonth, 'MMMM yyyy'); 
   }
+  
+getProgress(habit: Habit): number {
+  if (!habit.progress || habit.progress.length === 0) {
+    return 0;
+  }
+  const doneCount = habit.progress.length; 
+  return Math.min(100, Math.round((doneCount / habit.goal) * 100));
 }
+}
+
