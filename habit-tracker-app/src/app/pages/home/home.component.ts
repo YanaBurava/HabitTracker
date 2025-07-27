@@ -58,23 +58,22 @@ ngOnInit() {
     this.setCurrentWeek(newStart);
   }
 
-loadHabits(): void {
-  const active = this.habitService.getActiveHabits();
-  this.habits = this.habitService.filterHabitsByWeek(active, this.currentWeekStart, this.currentWeekEnd);
-}
+  loadHabits(): void {
+    const allActiveHabits = this.habitService.getActiveHabits();
+    this.habits = this.habitService.filterHabitsByWeek(allActiveHabits, this.currentWeekStart, this.currentWeekEnd);
+  }
 
   isMarked(habit: Habit, dateStr: string): boolean {
     return this.habitService.isMarkedDay(habit, dateStr);
   }
 
-toggleMark(habit: Habit, dateStr: string): void {
-  this.habitService.toggleMarkDay(habit, dateStr);
-  this.loadHabits(); 
-}
+  toggleMark(habit: Habit, dateStr: string): void {
+    this.habitService.toggleMarkDay(habit, dateStr);
+  }
 
-getProgress(habit: Habit): number {
-  return this.habitService.getProgressPercentage(habit);
-}
+  getProgress(habit: Habit): number {
+   return this.habitService.getProgressPercentage(habit);
+  }
 
    goToHabitDetail(habit: Habit) {
   this.router.navigate(['/habit', habit.id]);
