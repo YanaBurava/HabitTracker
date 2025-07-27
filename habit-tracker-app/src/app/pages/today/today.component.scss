@@ -116,12 +116,12 @@
 
 .habit-progress {
   font-size: 13px;
-  color: #bbb;
+  color: #ffffff;
   display: flex;
   align-items: center;
 
   &.goal-reached {
-    color: #ffe600;
+    color: #ffe600ad;
     font-weight: bold;
 
     .goal-icon {

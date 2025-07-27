@@ -50,12 +50,15 @@ export class TodayComponent implements OnInit {
     return this.habitService.isMarkedDay(habit, dateStr);
   }
 
-  toggleMark(habit: Habit, dayIndex: number): void {
-    const dateStr = this.daysISO[dayIndex];
-    this.habitService.toggleMarkDay(habit, dateStr);
-  }
-  toggleMarkToday(habit: Habit): void {
+toggleMark(habit: Habit, dayIndex: number): void {
+  const dateStr = this.daysISO[dayIndex];
+  this.habitService.toggleMarkDay(habit, dateStr);
+  this.refreshHabits(); // перезагружаем habit.progress
+}
+
+toggleMarkToday(habit: Habit): void {
   this.habitService.toggleMarkDay(habit, this.todayDateStr);
+  this.refreshHabits(); // тоже
 }
 
 isMarkedToday(habit: Habit): boolean {

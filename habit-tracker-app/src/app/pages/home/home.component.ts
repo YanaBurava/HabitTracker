@@ -27,16 +27,6 @@ ngOnInit() {
   const today = new Date();
   this.currentDate = today.toLocaleDateString();
 
-  this.weather = {
-    temperature: 22,
-    description: 'Sunny'
-  };
-
-  this.wordOfTheDay = {
-    word: 'Ebullient',
-    definition: 'Cheerful and full of energy.'
-  };
-
   this.setCurrentDate();
   this.setCurrentWeek(new Date());
   this.loadHabits();
@@ -68,23 +58,23 @@ ngOnInit() {
     this.setCurrentWeek(newStart);
   }
 
-  loadHabits(): void {
-    const allActiveHabits = this.habitService.getActiveHabits();
-    this.habits = this.habitService.filterHabitsByWeek(allActiveHabits, this.currentWeekStart, this.currentWeekEnd);
-  }
+loadHabits(): void {
+  const active = this.habitService.getActiveHabits();
+  this.habits = this.habitService.filterHabitsByWeek(active, this.currentWeekStart, this.currentWeekEnd);
+}
 
   isMarked(habit: Habit, dateStr: string): boolean {
     return this.habitService.isMarkedDay(habit, dateStr);
   }
 
-  toggleMark(habit: Habit, dateStr: string): void {
-    this.habitService.toggleMarkDay(habit, dateStr);
-  }
+toggleMark(habit: Habit, dateStr: string): void {
+  this.habitService.toggleMarkDay(habit, dateStr);
+  this.loadHabits(); 
+}
 
-  getProgress(habit: Habit): number {
-    const count = habit.progress.length;
-    return Math.min(100, Math.round((count / habit.goal) * 100));
-  }
+getProgress(habit: Habit): number {
+  return this.habitService.getProgressPercentage(habit);
+}
 
    goToHabitDetail(habit: Habit) {
   this.router.navigate(['/habit', habit.id]);
