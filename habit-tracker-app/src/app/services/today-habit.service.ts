@@ -78,8 +78,6 @@ mapHabitsWithProgress(storedProgress: Record<string, string[]>): Habit[] {
   });
 }
 
-
-
 updateHabitStatuses(habits: Habit[]): Habit[] {
   const now = new Date();
   return habits.map(habit => {
