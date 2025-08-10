@@ -1,11 +1,12 @@
 @use "sass:color";
-$grad-start:#44bdd3;      
-$grad-end:  #a777e3;     
-$grad-alt:   #5ab6ff;   
+$grad-start:#44bdd38f;      
+$grad-end:  #a877e3b4;     
+$grad-alt:   #60b1f3be;   
 $bg-glass:   rgba(255, 255, 255, 0.90);
 $grad-start33: #ffffff;
 $grad-end33: #e6e6e6;
-$txt-light:  #dfcece;      
+$txt-light:  #e6e4eb;      
+$txt-button:  #fdfdfd;      
 $txt-dark:   #2c2c2c;   
 $shadow:     0 8px 24px rgba(0, 0, 0, 0.35);
 
@@ -67,8 +68,11 @@ $shadow:     0 8px 24px rgba(0, 0, 0, 0.35);
 
     button,
     button[mat-icon-button] {
-      width: 42px;
-      height: 42px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+      width: 40px;
+      height: 40px;
       border-radius: 12px;
       background: linear-gradient(135deg, $grad-start, $grad-end);
       color: $txt-light;
@@ -181,7 +185,7 @@ mat-paginator{ --mat-paginator-container-size:40px; }
   min-width: 160px;
   font-weight: 700;
   background: linear-gradient(135deg, $grad-start, $grad-end);
-  color: $txt-light;
+  color: $txt-button !important;
   box-shadow: 0 0 10px rgba($grad-end, .4);
   transition: filter .25s ease;
 

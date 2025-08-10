@@ -28,15 +28,13 @@
     <input matInput placeholder="Enter habit name" [(ngModel)]="searchTerm" (input)="onSearchChange()" />
   </mat-form-field>
 
-  <button mat-raised-button color="primary" (click)="onAddHabit()" class="add-button">
+  <button mat-raised-button (click)="onAddHabit()" class="add-button">
     Add Habit
   </button>
   </div>
 </div>
-<!-- (1) корневой контейнер для списка и пагинации -->
 <div class="habits-container" *ngIf="!editingHabit">
 
-  <!-- (2) сами карточки -->
  <div class="habit-list">
     <app-habit-card
       *ngFor="let habit of pagedHabits"
@@ -46,7 +44,6 @@
       [class.active-habit]="habit.isActive">
     </app-habit-card>
   </div>
-  <!-- (3) пагинация — обёртка, чтобы «прижать» слева -->
   <div class="paginator-wrapper">
     <mat-paginator
       [length]="selectedGroup === 'All' ? habits.length : (groupedHabits[selectedGroup].length || 0)"

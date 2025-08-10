@@ -1,8 +1,8 @@
 @use "sass:color";
 
-$grad-start   : #a66cff;      // violet
-$grad-end     : #ff89e9;      // pink
-$grad-alt     : #5ab6ff;      // aqua‑blue
+$grad-start   : #a76cffb7;      // violet
+$grad-end     : #ff89e99f;      // pink
+$grad-alt     : #5ab5ffa9;      // aqua‑blue
 $grad-start33 : #ffffff;
 $grad-end33   : #e6e6e6;
 $bg-glass     : rgba(255, 255, 255, 0.18);
@@ -106,28 +106,32 @@ body {
     gap: 0.5rem;
     margin-top: 1rem;
 
-    button {
-      background: linear-gradient(135deg, #90a4e4, #b797df);
-      border: none;
-      padding: 0.7rem;
-      border-radius: 0.9rem;
-      color: $txt-light;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #90a4e4d5, #b797dfec);
+  border: none;
+  padding: 0.7rem;
+  border-radius: 0.9rem;
+  color: $txt-light;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
-      &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      }
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
 
-      &:focus-visible {
-        outline: 2px solid $txt-light;
-        outline-offset: 2px;
-      }
+  &:focus-visible {
+    outline: 2px solid $txt-light;
+    outline-offset: 2px;
+  }
 
-      mat-icon {
-        font-size: 1.2rem;
-      }
-    }
+  mat-icon {
+    font-size: 1.2rem;
+  }
+}
+
   }
 }

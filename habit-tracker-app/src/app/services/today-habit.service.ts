@@ -11,7 +11,7 @@ export class HabitsService {
 private readonly STORAGE_KEY = 'habitProgress';
 private readonly HABITS_KEY = 'habitsList';
 
-constructor(private habitService: HabitService) {}
+constructor() {}
 
   loadHabits(): Habit[] {
     const raw = localStorage.getItem(this.HABITS_KEY);
@@ -92,7 +92,6 @@ updateHabitStatuses(habits: Habit[]): Habit[] {
   });
 }
 
-
    getHabits(): Habit[] {
     const storedProgress = this.loadStoredProgress();
     const habitsWithProgress = this.mapHabitsWithProgress(storedProgress);
@@ -102,8 +101,8 @@ updateHabitStatuses(habits: Habit[]): Habit[] {
 
   getActiveHabits(): Habit[] {
  const now = new Date();
-    return this.habitService.getHabits().filter(habit =>
-      habit.startDate <= now && (!habit.endDate || habit.endDate >= now)
+     return this.getHabits().filter(habit =>
+    habit.startDate <= now && (!habit.endDate || habit.endDate >= now)
     );
     }
 
