@@ -1,118 +1,137 @@
-.habit-card {
-  margin: 1.5rem 0;
-  border-radius: 16px;
-  box-shadow: 0 0 6px 3px solid transparent;
-  cursor: pointer;
-  color: #333;
+@use "sass:color";
 
-  background: linear-gradient(145deg, #ffffff, #f7f5f3);
-   
-  transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.4s ease,
-    background 0.4s ease;
+$grad-start   : #a76cffb7;      // violet
+$grad-end     : #ff89e99f;      // pink
+$grad-alt     : #5ab5ffa9;      // aqua‑blue
+$grad-start33 : #ffffff;
+$grad-end33   : #e6e6e6;
+$bg-glass     : rgba(255, 255, 255, 0.18);
+$txt-light    : #ffffff;
+$shadow       : 0 8px 24px rgba(0, 0, 0, 0.35);
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.habit-card {
+  position: relative;
+  background: linear-gradient(145deg, $grad-start33, $grad-end33) no-repeat, $bg-glass;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: $shadow;
+
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
 
   &:hover {
-    transform: scale(1.02);
-    border-color: #c2bebe;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 20px 40px rgba(0, 0, 0, 0.08);
-    background: linear-gradient(145deg, #ebe8e6, #cccce2);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
   }
 
   &.active-habit {
-    animation: glow 2s infinite ease-in-out;
+    animation: glow 2.2s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(27, 73, 73, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
   }
 
   @keyframes glow {
-    0%, 100% {
-      box-shadow: 0 0 6px 3px #4c5baf;
+    0% {
+      box-shadow: 0 0 15px rgba(14, 68, 68, 0.6);
     }
-    50% {
-      box-shadow: 0 0 15px 6px #a74caf;
+    100% {
+      box-shadow: 0 0 25px rgba(46, 114, 105, 0.7);
     }
   }
 
-  mat-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 24px;
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #444;
+.icon-wrapper {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cec7c7;
+  margin-bottom: 1rem;
+
+  span {
+    font-size: 2rem;
+    color: $txt-light;
   }
 
-  .habit-icon {
-    font-size: 26px;
-    margin-top: 4px;
-    color: inherit;           
+  &.active-habit {
+    box-shadow:
+      0 0 30px rgba(0, 255, 200, 0.4);
+    animation: pulse-neon 2s infinite ease-in-out;
   }
+}
 
-  .habit-title {
+  .habit-content {
+    flex-grow: 1;
     display: flex;
-    align-items: flex-start;
-     gap: 8px;
-      color: inherit; 
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $txt-light;
+      margin: 0;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #ccc;
+      word-break: break-word;
+    }
+
+    .dates {
+      font-size: 0.8rem;
+      color: #aaa;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+   
+    }
   }
 
   .actions {
     display: flex;
-    gap: 12px;
-    margin-right: 8px;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
 
-    button {
-      background: rgba(0, 0, 0, 0.04);
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s ease;
-      color: #555;
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #90a4e4d5, #b797dfec);
+  border: none;
+  padding: 0.7rem;
+  border-radius: 0.9rem;
+  color: $txt-light;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
-      &:hover {
-        background: rgba(0, 0, 0, 0.1);
-        color: #222;
-      }
-
-      mat-icon {
-        font-size: 20px;
-      }
-    }
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   }
 
-  .habit-content {
-    padding: 0 24px 16px 24px;
-    font-size: 0.95rem;
-    color: #555;
+  &:focus-visible {
+    outline: 2px solid $txt-light;
+    outline-offset: 2px;
+  }
 
-    .habit-description {
-      margin-bottom: 12px;
-    }
+  mat-icon {
+    font-size: 1.2rem;
+  }
+}
 
-    .habit-dates {
-      font-size: 0.85rem;
-      color: #777;
-      margin-bottom: 8px;
-
-      span {
-        margin-right: 12px;
-      }
-    }
-
-    .habit-status {
-      font-size: 0.8rem;
-      font-weight: 600;
-
-      .active {
-        color: #4caf50;
-      }
-
-      .expired {
-        color: #969090;
-      }
-    }
   }
 }

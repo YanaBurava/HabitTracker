@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordOfTheDayComponent } from './word-of-the-day.component';
+import { RadarChartComponent } from './radar-chart.component';
 
-describe('WordOfTheDayComponent', () => {
-  let component: WordOfTheDayComponent;
-  let fixture: ComponentFixture<WordOfTheDayComponent>;
+describe('RadarChartComponent', () => {
+  let component: RadarChartComponent;
+  let fixture: ComponentFixture<RadarChartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WordOfTheDayComponent]
+      declarations: [RadarChartComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WordOfTheDayComponent);
+    fixture = TestBed.createComponent(RadarChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

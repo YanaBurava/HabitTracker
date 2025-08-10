@@ -54,6 +54,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatDialogModule,
     ReactiveFormsModule,
+    ReactiveFormsModule,
    RouterModule.forChild(routes)
   ]
 })

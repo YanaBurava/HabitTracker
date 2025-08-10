@@ -1,0 +1,251 @@
+.habit-details {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  font-family: Arial, sans-serif;
+
+h2 {
+  border-radius: 6px;
+  color: #a8a3a3;
+  display: inline-block;
+}
+
+.habit-name {
+  text-align: center;
+  text-shadow: 2px 2px 4px var(--habit-color, #6c6e6c);
+}
+
+  p {
+    font-size: 16px;
+    margin: 8px 0;
+      color: #12142eab;
+
+
+    strong {
+      color: #6e6868;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+  }
+}
+.habit-details section {
+  margin-top: 40px;
+}
+
+.progress-and-calendar {
+  display: flex;
+  gap: 20px;
+
+  .progress-circle {
+    width: 40%;
+  }
+
+  .resizable-calendar-container {
+    width: 60%;
+  }
+}
+.progress-circle {
+  flex: 1 1 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  max-width: 600px; // разумный максимум
+  max-height: 600px;
+}
+
+
+.resizable-calendar-container {
+  resize: both;
+  overflow: auto;
+  min-width: 320px;
+  min-height: 360px;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid #ddd;
+    padding: 20px 12px 12px 12px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  flex-grow: 1;
+
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 100%;
+    padding: 0 10px;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #333;
+      padding: 0;
+      line-height: 1;
+      user-select: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #1b183b94;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+
+    div {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.3s ease;
+      padding: 6px;
+    }
+  }
+}
+
+.marked {
+  background-color: var(--habit-color, #4caf50);
+}
+
+.empty {
+  background-color: #ccc;
+  color: #666;
+}
+
+.year-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;             
+  margin-bottom: 5px;    
+ 
+  button {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #333;
+      padding: 0;
+      line-height: 1;
+      user-select: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #1b183b94;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+}
+
+.year-heatmap {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(53, 12px); 
+  grid-auto-rows: 12px;
+  gap: 4px;
+  justify-content: start;
+
+  div {
+    width: 12px;
+    height: 12px;
+    background-color: #eee;
+    border-radius: 3px;
+    cursor: default;
+    box-shadow: 0 0 2px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  div.marked {
+    background-color: var(--habit-color, #4caf50);
+  }
+}
+// Адаптив
+@media (max-width: 480px) {
+  .habit-details {
+    padding: 10px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 6px 0;
+    }
+  }
+
+  .progress-and-calendar {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .progress-circle {
+    width: 150px;
+    height: 150px;
+  }
+
+  .resizable-calendar-container {
+    min-width: 100%;
+    min-height: auto;
+    padding: 20px 12px 12px 12px;
+
+    .calendar-header {
+      button {
+        font-size: 1.4rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+
+    .calendar-grid {
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+
+      div {
+        font-size: 14px;
+        padding: 2px;
+      }
+    }
+  }
+
+  .year-heatmap {
+    grid-template-columns: repeat(26, 12px);
+    gap: 2px;
+
+    div {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

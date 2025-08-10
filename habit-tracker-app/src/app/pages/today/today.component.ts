@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Habit } from '../../models/habit.model';
-import { HabitService } from '../../services/today-habit.service';
+import { HabitsService } from '../../services/today-habit.service';
 import { startOfWeek, addDays } from 'date-fns';
-
+import { Router } from '@angular/router';
+import { NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-today',
   standalone: false,
@@ -16,10 +18,16 @@ export class TodayComponent implements OnInit {
   todayDateStr: string = '';
   currentDayIndex: number = 0;
 
-  constructor(private habitService: HabitService) {}
+  constructor(private habitService: HabitsService, private router: Router) {}
 
   ngOnInit(): void {
     this.todayDateStr = this.habitService.formatDate(new Date());
+    this.router.events
+  .pipe(filter(event => event instanceof NavigationEnd))
+  .subscribe(() => {
+    this.refreshHabits();
+  });
+
     this.habits = this.habitService.getActiveHabits();
 
     this.updateDaysISO();
@@ -42,12 +50,15 @@ export class TodayComponent implements OnInit {
     return this.habitService.isMarkedDay(habit, dateStr);
   }
 
-  toggleMark(habit: Habit, dayIndex: number): void {
-    const dateStr = this.daysISO[dayIndex];
-    this.habitService.toggleMarkDay(habit, dateStr);
-  }
-  toggleMarkToday(habit: Habit): void {
+toggleMark(habit: Habit, dayIndex: number): void {
+  const dateStr = this.daysISO[dayIndex];
+  this.habitService.toggleMarkDay(habit, dateStr);
+  this.refreshHabits(); // перезагружаем habit.progress
+}
+
+toggleMarkToday(habit: Habit): void {
   this.habitService.toggleMarkDay(habit, this.todayDateStr);
+  this.refreshHabits(); // тоже
 }
 
 isMarkedToday(habit: Habit): boolean {
@@ -65,5 +76,12 @@ hasReachedGoal(habit: Habit): boolean {
 getCurrentDayIndex(): number {
   const todayISO = this.todayDateStr;
   return this.daysISO.findIndex(day => day === todayISO);
+}
+ goToHabitDetail(habit: Habit) {
+  this.router.navigate(['/habit', habit.id]);
+}
+
+refreshHabits(): void {
+  this.habits = this.habitService.getActiveHabits();
 }
 }

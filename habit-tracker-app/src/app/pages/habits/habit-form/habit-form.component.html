@@ -1,10 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>{{ labels.Name }}</mat-label>
     <input matInput formControlName="name" required />
     <mat-error *ngIf="shouldShowError('name')">
-            {{ labels.Required }}
+      {{ labels.Required }}
     </mat-error>
   </mat-form-field>
 
@@ -50,7 +49,7 @@
     <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
     <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
     <mat-datepicker #startPicker></mat-datepicker>
-    <mat-error *ngIf="form.get('startDate')?.invalid && form.get('startDate')?.touched">
+    <mat-error *ngIf="shouldShowError('startDate')">
       {{ labels.SelectStartDate }}
     </mat-error>
   </mat-form-field>

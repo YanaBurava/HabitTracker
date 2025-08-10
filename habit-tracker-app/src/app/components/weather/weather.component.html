@@ -1,0 +1,18 @@
+<div *ngIf="loading">Loading weather...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div class="weather-card" *ngIf="weatherData && !loading">
+  <div class="weather-top">
+    <img
+      [src]="'https://openweathermap.org/img/wn/' + weatherData.weather[0].icon + '@2x.png'"
+      [alt]="weatherData.weather[0].description"
+    />
+    <div class="weather-temp">
+      {{ weatherData.main.temp | number:'1.0-0' }}°C
+    </div>
+  </div>
+
+  <div class="weather-info">
+    <p><strong>{{ weatherData.name }}, {{ weatherData.sys.country }}</strong></p>
+    <p>{{ weatherData.weather[0].description | titlecase }}</p>
+</div>

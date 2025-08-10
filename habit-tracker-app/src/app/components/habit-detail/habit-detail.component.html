@@ -1,2 +1,59 @@
-<h2>Habit Detail</h2>
-<p>Details for habit ID: {{ habitId }}</p>
+<div class="habit-details">
+  @if (habit?.name) {
+<h2
+ class="habit-name"
+ [style.--habit-color]="habit?.color">{{ habit?.name }}</h2>
+    <p><strong>Group:</strong> {{ habit?.group}}</p>
+    <p><strong>Goal:</strong> {{ habit?.goal}}</p>
+
+<div class="progress-and-calendar">
+  <app-circular-progress
+    *ngIf="habit"
+    [progress]="getProgress(habit)">
+  </app-circular-progress>
+
+  <div class="resizable-calendar-container">
+    <div class="calendar-header">
+      <button (click)="previousMonth()">&#8592;</button>
+      <h2>{{ getMonthLabel() }}</h2>
+      <button (click)="nextMonth()">&#8594;</button>
+    </div>
+
+    <div class="calendar-grid">
+      <div
+        *ngFor="let day of daysInMonth"
+        [class.marked]="isMarked(day)"
+        [class.empty]="!isMarked(day)"
+        [matTooltip]="day | date: 'fullDate'"
+        [style.backgroundColor]="isMarked(day) ? habit?.color : '#ccc'">
+        {{ day | date: 'd' }}
+      </div>
+    </div>
+  </div>
+</div>
+
+  <section>
+<div class="year-navigation">
+  <button (click)="previousYear()">&#8592;</button>
+  <h2>{{ getYearLabel() }}</h2>
+  <button (click)="nextYear()">&#8594;</button>
+</div>
+
+    <div class="year-heatmap">
+      <div
+        *ngFor="let day of daysInYear"
+        class="day-cell"
+        [class.marked]="isMarked(day)"
+                [style.backgroundColor]="isMarked(day) ? habit?.color : '#ccc'"
+        [title]="day | date:'dd MMM yyyy'"
+      >
+        &nbsp;
+      </div>
+    </div>
+  </section>
+
+
+  } @else {
+    <p>Habit not found.</p>
+  }
+</div>

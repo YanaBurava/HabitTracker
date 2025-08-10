@@ -1,4 +1,4 @@
-<h2>Today — {{ todayDateStr }}</h2>
+  <h2 class="main-title">{{ todayDateStr }}</h2>
 
 <div *ngFor="let habit of habits" class="habit-card" [style.borderColor]="habit.color">
 
@@ -10,8 +10,10 @@
     <mat-icon *ngIf="isMarkedToday(habit)">check</mat-icon>
   </button>
 
-  <mat-icon class="habit-icon">{{ habit.icon }}</mat-icon>
-  <span class="habit-name">{{ habit.name }}</span>
+  <mat-icon class="habit-icon"
+            [style.color]="isMarkedToday(habit) ? habit.color : '#ccc'">{{ habit.icon }}
+  </mat-icon>
+  <span class="habit-name" (click)="goToHabitDetail(habit)">{{ habit.name }}</span>
 
   <div class="habit-progress" [class.goal-reached]="hasReachedGoal(habit)">
     {{ getProgressText(habit) }}

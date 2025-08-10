@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, signal, effect } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Subject, filter, takeUntil } from 'rxjs';
 import { Habit } from '../../../models/habit.model';
@@ -14,28 +14,31 @@ import { HABIT_ICONS } from '../../../constants/habit-icons.constant';
   standalone: false
 })
 export class HabitFormComponent implements OnInit, OnDestroy {
-   labels = HabitFormLabels;
+  labels = HabitFormLabels;
   iconOptions = HABIT_ICONS;
   destroy$ = new Subject<void>();
 
   private _habit: Habit | null = null;
-  private editableHabit$ = new BehaviorSubject<Habit>(this.getEmptyHabit());
+  editableHabit = signal<Habit>(this.getEmptyHabit());
   @Input() habitGroups: string[] = [];
 
   @Input()
+   get habit(): Habit | null {
+    return this._habit;
+  }
   set habit(value: Habit | null) {
- this._habit = value;
+    this._habit = value;
     const habitToEdit = value ? { ...value } : this.getEmptyHabit();
-    this.editableHabit$.next(habitToEdit);
-    this.form.patchValue(habitToEdit);
-    }
- 
+    this.editableHabit.set(habitToEdit);
+     this.form.patchValue(habitToEdit);
+  }
+
   @Output() save = new EventEmitter<Habit>();
   @Output() cancel = new EventEmitter<void>();
 
-   form: FormGroup;
+  form: FormGroup;
 
-    constructor(private fb: FormBuilder, private dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: [''],
@@ -47,18 +50,22 @@ export class HabitFormComponent implements OnInit, OnDestroy {
       endDate: [null],
     });
   }
-  get habit(): Habit | null {
-    return this._habit;
+
+  ngOnInit(): void {
+
+    if (!this._habit) {
+      const savedHabit = localStorage.getItem('lastEditedHabit');
+      if (savedHabit) {
+        try {
+          this.habit = JSON.parse(savedHabit);
+        } catch {
+          console.warn('Invalid habit in localStorage');
+        }
+      }
+    }
   }
 
- ngOnInit(): void {
-    this.editableHabit$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(habit => {
-        this.form.patchValue(habit);
-      });
-  }
-   onSubmit(): void {
+  onSubmit(): void {
     const now = new Date();
     const raw = this.form.getRawValue();
 
@@ -68,8 +75,10 @@ export class HabitFormComponent implements OnInit, OnDestroy {
       isActive: raw.startDate <= now && (!raw.endDate || raw.endDate >= now),
       isExpired: raw.endDate ? raw.endDate < now : false
     };
+     localStorage.setItem('lastEditedHabit', JSON.stringify(updatedHabit));
 
-    this.save.emit(updatedHabit);
+  
+     this.save.emit(updatedHabit);
   }
 
   onCancel(): void {
@@ -92,11 +101,11 @@ export class HabitFormComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.cancel.emit());
   }
+
   shouldShowError(controlName: string): boolean {
     const control = this.form.get(controlName);
     return !!(control && control.invalid && control.touched);
   }
-
 
   private getEmptyHabit(): Habit {
     return {

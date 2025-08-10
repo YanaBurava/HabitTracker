@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Habit } from '../models/habit.model';
 import { MOCK_HABIT } from '../mock/mock-habit';
+import { HabitsService } from './today-habit.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,20 @@ export class HabitService {
   private habitsSubject = new BehaviorSubject<Habit[]>([]);
   habits$: Observable<Habit[]> = this.habitsSubject.asObservable();
 
-  constructor() {
-    const parsedHabits = MOCK_HABIT.map(habit => ({
-      ...habit,
-      startDate: new Date(habit.startDate),
-      endDate: habit.endDate ? new Date(habit.endDate) : null,
-    }));
-    this.setHabits(parsedHabits);
+constructor(private habitsStorage: HabitsService) {
+    const storedHabits = this.habitsStorage.getHabits();
+
+    if (storedHabits.length > 0) {
+      this.setHabits(storedHabits);
+    } else {
+      const parsedHabits = MOCK_HABIT.map(habit => ({
+        ...habit,
+        startDate: new Date(habit.startDate),
+        endDate: habit.endDate ? new Date(habit.endDate) : null,
+      }));
+      this.setHabits(parsedHabits);
+      this.habitsStorage.saveHabits(parsedHabits); // Сохраняем в localStorage
+    }
   }
 
   private setHabits(habits: Habit[]): void {
@@ -50,12 +58,15 @@ export class HabitService {
   getIconForGroup(group: string): string {
     const iconMap: Record<string, string> = {
       General: 'home',
-      Fitness: 'fitness_center',
+      Health: 'fitness_center',
       Reading: 'menu_book',
       Relax: 'spa',
       Food: 'restaurant',
-      Study: 'school',
       Sleep: 'bedtime',
+      Learning: 'menu_book',
+      Social: 'group',
+      Productivity: 'work',
+      Mindfulness: 'self_improvement' 
     };
     return iconMap[group] || 'category';
   }
@@ -63,6 +74,7 @@ export class HabitService {
   addHabit(habit: Habit) {
     const updatedHabits = [...this.getHabits(), habit];
     this.setHabits(updatedHabits);
+    this.habitsStorage.saveHabits(updatedHabits);
   }
 
   updateHabit(updatedHabit: Habit) {
@@ -70,10 +82,17 @@ export class HabitService {
       habit.id === updatedHabit.id ? updatedHabit : habit
     );
     this.setHabits(updatedHabits);
+    this.habitsStorage.saveHabits(updatedHabits);
   }
 
   deleteHabit(habitId: number) {
     const updatedHabits = this.getHabits().filter(habit => habit.id !== habitId);
     this.setHabits(updatedHabits);
+     this.habitsStorage.saveHabits(updatedHabits);
   }
+
+ getHabitById(id: number): Habit | null {
+  const habit = this.getHabits().find(habit => habit.id === id);
+  return habit || null;
+}
 }
